@@ -23,17 +23,15 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
   <link rel="import" href="../../paper-input/paper-input.html">
   <link rel="import" href="../../paper-styles/color.html">
   <link rel="import" href="../../paper-styles/demo-pages.html">
-  <link rel="import" href="../../paper-toast/paper-toast.html">
-  <link rel="import" href="../../paper-button/paper-button.html">
-  
+
   <link rel="import" href="../../things-spinner/things-spinner.html">
   <link rel="import" href="../../things-setting/things-setting.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../paper-toast/paper-toast.html">
 
   <link rel="stylesheet" href="../../paper-styles/demo.css">
-
-  <link rel="import" href="../things-code-combo.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../things-locale-combo.html">
   <style is="custom-style">
 
     .output {
@@ -73,8 +71,8 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
   <div class="vertical-section-container">
     <nav class="vertical-section">
       <ul class="layout horizontal wrap">
-        <li><b>Code Combo</b></li>
-        <li><a href="demo-things-locale-combo.html">Locale Combo</a></li>
+        <li><a href="index.html">Locale Combo</a></li>
+        <li><b>Locale Combo</b></li>
       </ul>
     </nav>
 
@@ -83,37 +81,15 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
         <things-setting id="setting"></things-setting>
         <things-spinner id="spinner"></things-spinner>
         <paper-toast id="toast" class="Toast" duration="8000"></paper-toast>
-
         <template is="dom-bind" id="app">
-          <paper-button on-tap="openSetting">Setting</paper-button>
-
-          <paper-input label="Selected Value" value="{{codeName}}"></paper-input>
-
-          <paper-input label="Selected Description" value="{{codeDesc}}"></paper-input>
-
-          <h4>Things Code Combo</h4>
-
-          <things-code-combo 
-            id="code-combo" 
-            label="Language" 
-            value="en-US" 
-            code-name="LOCALE" 
-            label-path="description" 
-            value-path="name">
-          </things-code-combo>
-
-          <script>
-            var codeCombo = document.querySelector("#code-combo");
-            codeCombo.addEventListener("things-combo-value-changed", function(e){
-              if(e.detail) {
-                app.codeName = e.detail.value;
-                app.codeDesc = e.detail.item ? e.detail.item.description : '';
-              }
-            });
-            app.openSetting = function  (argument) {
-               app.$.setting.open(); 
-            }
-          </script>
+          <paper-input label="Selected Value" value="{{selectedLocale}}"></paper-input>
+          <h4>Things Locale Code Combo</h4>
+          <things-locale-combo 
+            id="locale-combo" 
+            storage-name="setting.locale" 
+            default-locale="en-US"
+            selected-locale="{{selectedLocale}}">
+          </things-locale-combo>
         </template>
       </template>
     </demo-snippet>

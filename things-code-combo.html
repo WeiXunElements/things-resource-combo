@@ -1,0 +1,129 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../things-ajax/things-ajax.html">
+<link rel="import" href="../things-combo/things-combo.html">
+
+<!--
+코드 셀렉터. 서버에 저장되어 있는 코드 정보를 조회하여 콤보로 표시하는 컴포넌트 
+
+  Example:
+
+    <things-code-combo 
+      id="code-selector" 
+      label="Language" 
+      value="en-US" 
+      code-name="LOCALE" 
+      label-path="description" 
+      value-path="name">
+    </things-code-combo>
+
+@demo demo/index.html
+-->
+<dom-module id="things-code-combo">
+  <template>
+
+    <things-combo 
+      id="combo" 
+      name="[[name]]" 
+      label="[[label]]" 
+      value="{{value}}" 
+      items="[[items]]" 
+      label-path="[[labelPath]]" 
+      value-path="[[valuePath]]">
+    </things-combo>
+
+    <things-ajax
+      auto
+      id="resource" 
+      resource-url="common_codes/show_by_name"
+      resource-action="show_by_name"
+      params="[[params]]">
+    </things-ajax>
+
+  </template>
+
+  <script type="text/javascript">
+    Polymer({
+      is: "things-code-combo",
+
+      properties: {
+        /**
+        * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+        */
+        name : {
+          type: String
+        },
+
+        /**
+        * element에 표시할 라벨 
+        */
+        label: {
+          type: String
+        },
+
+        /**
+        * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+        */
+        value: {
+          type: String
+        },
+
+        /**
+        * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
+        */
+        labelPath: {
+          type: String
+        },
+
+        /**
+        * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
+        */
+        valuePath: {
+          type: String
+        },
+
+        /**
+        * code 명. code name으로 code 정보를 조회하는 URL을 구성한다.
+        */
+        codeName: {
+          type: String,
+          notify: true
+        },
+
+        /**
+        * code items
+        */
+        items: {
+          type: Array
+        },
+
+        /**
+        * Code 조회시 서버에 넘어가는 파라미터 (codeName)
+        */
+        params: {
+          type: String,
+          computed: '_computeParams(codeName)'
+        }
+      },
+
+      listeners: {
+        'resource.things-ajax-response' : '_onResponse'
+      },
+
+      /**
+      * parameter
+      */
+      _computeParams: function(codeName) {
+        return { name : codeName };
+      },
+
+      /**
+      * 코드 조회 결과 응답이 도착했을 경우
+      */
+      _onResponse: function(e) {
+        this.items = e.detail.items;
+      }
+
+    });
+  </script>
+</dom-module>
