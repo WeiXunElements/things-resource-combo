@@ -69,17 +69,17 @@ Example:
 				'code-selector.things-combo-value-changed' : '_onComboValueChanged'
 			},
 
+			ready: function () {
+				if(dataGlobal){
+				 this.selectedLocale = dataGlobal.language; 
+				}
+			},
 			/**
 			 * Combo 값이 변경될 때 
 			 */
 			_onComboValueChanged: function(event) {
 				this.set('selectedLocale',event.detail.value);
-				if(window.I18nMsg)
-				{
-					I18nMsg.lang = dataGlobal.language || document.documentElement.lang
-					I18nMsg.lang = event.detail.value;
-				}
-				Platform.performMicrotaskCheckpoint();
+				this.language = this.selectedLocale;
 			},
 
 			/**

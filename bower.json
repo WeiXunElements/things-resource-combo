@@ -20,14 +20,14 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
     "things-ajax": "ThingsElements/things-ajax",
-    "things-combo": "ThingsElements/things-combo#^0.0.1",
+    "things-combo": "ThingsElements/things-combo",
     "iron-localstorage": "^1.0.5"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "^4.0.0",
-    "things-spinner": "ThingsElements/things-spinner#^0.0.1",
-    "things-setting": "ThingsElements/things-setting#^0.0.2",
+    "things-spinner": "ThingsElements/things-spinner",
+    "things-setting": "ThingsElements/things-setting",
     "paper-input": "^1.1.11",
     "paper-styles": "^1.1.4",
     "paper-toast": "^1.2.2",
