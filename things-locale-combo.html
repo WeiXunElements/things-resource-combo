@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-localstorage/iron-localstorage.html">
 
+<link rel="import" href="../things-i18n/things-i18n-msg.html">
 <link rel="import" href="things-code-combo.html">
 
 <!--
@@ -14,7 +15,7 @@ Example:
 		default-locale="{{globals.locale}}">
   </things-locale-combo>
 
-@demo demo/demo-things-locale-combo.html.html
+@demo demo/index.html
 -->
 
 <dom-module id="things-locale-combo">
@@ -25,10 +26,12 @@ Example:
 			}
 		</style>
 
+		<things-i18n-msg auto msgid="button.language">{{language}}</things-i18n-msg>
+
 		<things-code-combo 
 			id="code-selector" 
-			label="Language" 
-			value="[[defaultLocale]]" 
+			label="[[language]]" 
+			value="{{selectedLocale}}" 
 			code-name="LOCALE" 
 			label-path="description" 
 			value-path="name">
@@ -61,25 +64,19 @@ Example:
 				 * 선택된 Locale 값 
 				 */
 				selectedLocale: {
-					type: String
+					type: String,
+					notify:true
 				}
 			},
 
 			listeners: {
 				'code-selector.things-combo-value-changed' : '_onComboValueChanged'
 			},
-
-			ready: function () {
-				if(_thingsDataGlobal){
-				 this.selectedLocale = _thingsDataGlobal.language; 
-				}
-			},
 			/**
 			 * Combo 값이 변경될 때 
 			 */
 			_onComboValueChanged: function(event) {
 				this.set('selectedLocale',event.detail.value);
-				this.language = this.selectedLocale;
 			},
 
 			/**
