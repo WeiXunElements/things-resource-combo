@@ -13,10 +13,10 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
       label="Storage">
     </things-storage-combo>
 
-@demo ./demo/demo-things-storage-combo.html
+@demo ./things-resource-combo/demo/demo-things-storage-combo.html
 -->
 <dom-module id="things-storage-combo">
-	<template>
+  <template>
 
     <things-combo 
       id="combo" 
@@ -36,10 +36,10 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
       sort-fields="[[sortFields]]">
     </things-ajax>
 
-	</template>
+  </template>
 
   <script type="text/javascript">
-  	(function() {
+    (function() {
       Polymer({
         is: "things-storage-combo",
 
@@ -121,6 +121,6 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
         }
 
       })
-  	})();
+    })();
   </script>
 </dom-module>
