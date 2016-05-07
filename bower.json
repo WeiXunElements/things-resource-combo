@@ -1,18 +1,18 @@
 {
   "name": "things-resource-combo",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "authors": [
     "Hatio Lab. <heartyoh@hatiolab.com>"
   ],
-  "description": "Polymer element for resource code combo selector with elidom framework support.",
+  "description": "Polymer element for resource code combo selectors with elidom framework support.",
   "keywords": [
     "web-component",
     "polymer",
     "seed"
   ],
-  "main": "things-resource-combo.html",
+  "main": "elements.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/ThingsElements/seed-element/",
+  "homepage": "https://github.com/ThingsElements/things-resource-combo/",
   "ignore": [
     "/.*",
     "/test/"
