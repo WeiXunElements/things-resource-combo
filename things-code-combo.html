@@ -65,7 +65,8 @@
         * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
         */
         value: {
-          type: String
+          type: String,
+          notify: true
         },
 
         /**
@@ -86,8 +87,7 @@
         * code 명. code name으로 code 정보를 조회하는 URL을 구성한다.
         */
         codeName: {
-          type: String,
-          notify: true
+          type: String
         },
 
         /**
