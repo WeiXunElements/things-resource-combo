@@ -17,15 +17,14 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
 -->
 <dom-module id="things-storage-combo">
   <template>
-
     <things-combo 
       id="combo" 
       name="{{name}}" 
-      label="Storage" 
+      label="[[label]]" 
       value="{{value}}" 
       items="{{items}}" 
-      label-path="description" 
-      value-path="name">
+      label-path="[[labelPath]]" 
+      value-path="[[valuePath]]">
     </things-combo>
 
     <things-ajax
@@ -33,11 +32,10 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
       id="storage" 
       resource-url="storage_infos"
       resource-action="index"
-      select-fields="id,name,description"
+      select-fields="[[selectFields]]"
       query-fields="[[queryFields]]"
       sort-fields="[[sortFields]]">
     </things-ajax>
-
   </template>
 
   <script type="text/javascript">
@@ -57,7 +55,8 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
            * element에 표시할 라벨 
            */
           label: {
-            type: String
+            type: String,
+            value: 'Storage'
           },
 
           /**
@@ -65,21 +64,23 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
            */
           value: {
             type: String,
-            notify:true
+            notify: true
           },
 
           /**
            * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
            */
           labelPath: {
-            type: String
+            type: String,
+            value: 'description'
           },
 
           /**
            * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
            */
           valuePath: {
-            type: String
+            type: String,
+            value: 'name'
           },
 
           /**
@@ -88,6 +89,14 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
           items: {
             type: Array,
             notify: true
+          },
+
+          /**
+           * 조회 필드 
+           */
+          selectFields: {
+            type: String,
+            value: 'id,name,description'
           },
 
           /**

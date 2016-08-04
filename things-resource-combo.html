@@ -23,7 +23,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
     <things-combo 
       id="combo" 
       name="{{name}}" 
-      label="Select ..." 
+      label="[[label]]" 
       value="{{value}}" 
       items="{{items}}" 
       label-path="[[labelPath]]" 
@@ -60,7 +60,8 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
            * element에 표시할 라벨 
            */
           label: {
-            type: String
+            type: String,
+            value: 'Select ...'
           },
 
           /**
