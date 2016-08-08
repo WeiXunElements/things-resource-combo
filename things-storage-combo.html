@@ -28,12 +28,12 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
     </things-combo>
 
     <things-ajax
-      auto
       id="storage" 
       resource-url="storage_infos"
       resource-action="index"
       select-fields="[[selectFields]]"
       query-fields="[[queryFields]]"
+      last-response="{{lastResponse}}"
       sort-fields="[[sortFields]]">
     </things-ajax>
   </template>
@@ -115,6 +115,13 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
               field: 'name',
               ascending: true
             }]
+          },
+
+          /**
+           * ajax 호출 후 response
+           */
+          lastResponse: {
+            type: Object
           }
         },
 
@@ -127,7 +134,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
          */
         _dropdownOpenHandler: function(e) {
-          if(!this.items || this.items.length == 0) {
+          if(!this.lastResponse || this.lastResponse == 0) {
             this.$.storage.generateRequest();
           }
         },
