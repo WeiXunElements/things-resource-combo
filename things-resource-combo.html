@@ -117,7 +117,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
           itemsProp: {
             type: String,
             value: 'items'
-          }
+          },
 
           /**
            * 검색 결과 
@@ -168,7 +168,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
          * Resource 정보 결과 도착시 ...
          */
         _responseHandler: function(e) {
-          this.items = e.detail[this.itemsProp];
+          this.items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
         }
 
       })
