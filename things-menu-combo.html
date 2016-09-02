@@ -1,0 +1,112 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-localstorage/iron-localstorage.html">
+
+<link rel="import" href="../things-i18n-msg/things-i18n-msg.html">
+<link rel="import" href="../things-combo/things-combo.html">
+<link rel="import" href="../things-ajax/things-ajax.html">
+
+<dom-module id="things-menu-combo">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+		</style>		
+		</style>
+
+		<things-i18n-msg msgid="label.default_screen" msg="{{lDefaultScreen}}" hidden>Default Screen</things-i18n-msg>
+
+		<things-ajax
+			auto
+			id="menu-ajax"
+			resource-url="menus/user_menus/STANDARD"
+			resource-action="index"
+			query-fields="[[queryFields]]"
+			last-response="{{menus}}">
+		</things-ajax>
+
+		<things-combo
+      id="combo" 
+      label="[[lDefaultScreen]]" 
+      value="{{value}}" 
+      items="[[menus]]" 
+      label-path="name">
+		</things-combo>
+
+		<iron-localstorage name="[[storageName]]" value="{{defaultScreen}}"></iron-localstorage>
+	</template>
+	
+	<script>
+		Polymer({
+			is: 'things-menu-combo',
+
+			listeners: {
+				'combo.things-combo-value-changed': '_comboValueChanged',
+				'menu-ajax.things-ajax-response': '_ajaxResponsed'
+			},
+
+			properties: {
+				/**
+				 * routing data
+				 */
+				value: {
+					type: String
+				},
+
+				/**
+				 * ajax query field
+				 */
+				queryFields: {
+					type: Array,
+					value: [{
+						name: 'menu_type',
+						operator: 'eq',
+						value: 'SCREEN'
+					}, {
+						name: 'category',
+						operator: 'eq',
+						value: 'STANDARD'
+					}]
+				},
+
+				/**
+				 * defaultScreen routing info
+				 */
+				defaultScreen: {
+					type: String,
+					notify: true
+				}
+			},
+
+			/**
+			 * 메뉴 조회 후 response event listener
+			 * defaultScreen 값이 있다면 해당 값의 name을 찾아 value에 초기화
+			 */
+			_ajaxResponsed: function() {
+				if(this.defaultScreen) {
+					var routing = this.defaultScreen.slice(1);
+
+					for(var i = 0; i < this.menus.length; i++) {
+						if(this.menus[i].routing == routing) {
+							this.value = this.menus[i].name;
+						}
+					}
+				}
+			},
+
+			/**
+			 * things-combo value change event listener
+			 * value가 변경 되면 해당 routing을 defaultScreen에 초기화
+			 */
+			_comboValueChanged: function(event) {
+				var value = event.detail.value;
+
+				for(var i = 0; i < this.menus.length; i++) {
+					if(this.menus[i].name == value) {
+						this.defaultScreen = '/' + this.menus[i].routing;
+					}
+				}
+			}
+		})
+	</script>
+</dom-module>
