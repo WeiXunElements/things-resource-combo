@@ -31,6 +31,11 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
     </things-combo>
 
     <things-ajax
+      id="resource-url-ajax"
+      resource-action="index"
+    </things-ajax>
+
+    <things-ajax
       auto
       id="resource" 
       resource-url="[[resourceUrl]]"
@@ -85,7 +90,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
            */
           valuePath: {
             type: String,
-            value: 'name'
+            value: 'id'
           },
 
           /**
@@ -110,6 +115,23 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
           resourceUrl: {
             type: String
           },
+
+          /**
+           * 참조하는 resource의 name
+           */
+          resourceName: {
+            type: String
+          },
+
+          /**
+           * 참조하는 Resource의 type
+           * Menu Or Entity
+           */
+          resourceType: {
+            type: String,
+            observer: '_resourceTypeChanged'
+          },
+
 
           /**
            * Response 중에 데이터 프로퍼티
@@ -152,7 +174,47 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         listeners: {
           'combo.things-combo-opened' : '_dropdownOpenHandler',
-          'resource.things-ajax-response' : '_responseHandler'
+          'resource.things-ajax-response' : '_responseHandler',
+          'resource-url-ajax.things-ajax-response' : '_urlResponseHandler'
+        },
+
+        /**
+         * resource type에 따라 resourceName과 일치하는 데이터를 추출
+         */
+        _resourceTypeChanged: function(resourceType) {
+          if(resourceType && this.resourceName) {
+            var resourceName = this.resourceName;
+            var resourceUrlAjax = this.$['resource-url-ajax'];
+
+            resourceUrlAjax.queryFields = [{
+              name: 'name',
+              operator: 'eq',
+              value: resourceName
+            }]
+
+            switch(resourceType) {
+              case 'Entity':
+                resourceUrlAjax.resourceUrl = 'entities';
+                break;
+              
+              case 'Menu':
+                resourceUrlAjax.resourceUrl = 'menus';
+                break;
+            }
+
+            resourceUrlAjax.generateRequest();
+          }
+        },
+
+        /**
+         * resourceName, resrouceType에 따라 resourceUrl을 추출
+         */
+        _urlResponseHandler: function(response) {
+          if(this.resourceType.indexOf('Entity') >= 0) {
+            this.resourceUrl = response.detail.items[0].search_url;
+          } else if (this.resourceType.indexOf('Menu') >= 0) {
+            this.resourceUrl = response.detail.items[0].resource_url;
+          }
         },
 
         /**
