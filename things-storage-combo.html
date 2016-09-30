@@ -40,114 +40,111 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
   </template>
 
   <script type="text/javascript">
-    (function() {
-      Polymer({
-        is: "things-storage-combo",
+    Polymer({
+      is: "things-storage-combo",
 
-        properties: {
-          /**
-           * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-           */
-          name : {
-            type: String
-          },
-
-          /**
-           * element에 표시할 라벨 
-           */
-          label: {
-            type: String,
-            value: 'Storage'
-          },
-
-          /**
-           * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-           */
-          value: {
-            type: String,
-            notify: true
-          },
-
-          /**
-           * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
-           */
-          labelPath: {
-            type: String,
-            value: 'description'
-          },
-
-          /**
-           * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
-           */
-          valuePath: {
-            type: String,
-            value: 'name'
-          },
-
-          /**
-           * 검색 결과 
-           */
-          items: {
-            type: Array,
-            notify: true
-          },
-
-          /**
-           * 조회 필드 
-           */
-          selectFields: {
-            type: String,
-            value: 'id,name,description'
-          },
-
-          /**
-           * 쿼리 조건
-           */
-          queryFields: {
-            type: Array
-          },          
-
-          /**
-           * 소팅 조건
-           */
-          sortFields: {
-            type: Array,
-            value: [{
-              field: 'name',
-              ascending: true
-            }]
-          },
-
-          /**
-           * ajax 호출 후 response
-           */
-          lastResponse: {
-            type: Object
-          }
-        },
-
-        listeners: {
-          'combo.things-combo-opened' : '_dropdownOpenHandler',
-          'storage.things-ajax-response' : '_responseHandler'
+      properties: {
+        /**
+         * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         */
+        name : {
+          type: String
         },
 
         /**
-         * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
+         * element에 표시할 라벨 
          */
-        _dropdownOpenHandler: function(e) {
-          if(!this.lastResponse || this.lastResponse == 0) {
-            this.$.storage.generateRequest();
-          }
+        label: {
+          type: String,
+          value: 'Storage'
         },
 
         /**
-         * Storage 정보 결과 도착시 ...
+         * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
          */
-        _responseHandler: function(e) {
-          this.items = e.detail.items;
+        value: {
+          type: String,
+          notify: true
+        },
+
+        /**
+         * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
+         */
+        labelPath: {
+          type: String,
+          value: 'description'
+        },
+
+        /**
+         * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
+         */
+        valuePath: {
+          type: String,
+          value: 'name'
+        },
+
+        /**
+         * 검색 결과 
+         */
+        items: {
+          type: Array,
+          notify: true
+        },
+
+        /**
+         * 조회 필드 
+         */
+        selectFields: {
+          type: String,
+          value: 'id,name,description'
+        },
+
+        /**
+         * 쿼리 조건
+         */
+        queryFields: {
+          type: Array
+        },          
+
+        /**
+         * 소팅 조건
+         */
+        sortFields: {
+          type: Array,
+          value: [{
+            field: 'name',
+            ascending: true
+          }]
+        },
+
+        /**
+         * ajax 호출 후 response
+         */
+        lastResponse: {
+          type: Object
         }
+      },
 
-      })
-    })();
+      listeners: {
+        'combo.things-combo-opened' : '_dropdownOpenHandler',
+        'storage.things-ajax-response' : '_responseHandler'
+      },
+
+      /**
+       * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
+       */
+      _dropdownOpenHandler: function(e) {
+        if(!this.lastResponse || this.lastResponse == 0) {
+          this.$.storage.generateRequest();
+        }
+      },
+
+      /**
+       * Storage 정보 결과 도착시 ...
+       */
+      _responseHandler: function(e) {
+        this.items = e.detail.items;
+      }
+    });
   </script>
 </dom-module>

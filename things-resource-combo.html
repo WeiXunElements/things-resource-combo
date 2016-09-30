@@ -32,7 +32,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
     <things-ajax
       id="resource-url-ajax"
-      resource-action="index"
+      resource-action="index">
     </things-ajax>
 
     <things-ajax
@@ -49,191 +49,175 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
   </template>
 
   <script type="text/javascript">
-    (function() {
-      Polymer({
-        is: "things-resource-combo",
+    Polymer({
+      is: "things-resource-combo",
 
-        properties: {
-          /**
-           * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-           */
-          name: {
-            type: String
-          },
-
-          /**
-           * element에 표시할 라벨 
-           */
-          label: {
-            type: String,
-            value: 'Select ...'
-          },
-
-          /**
-           * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-           */
-          value: {
-            type: String,
-            notify: true
-          },
-
-          /**
-           * 코드 데이터 중에서 Code Selector에 표시할 정보에 대한 데이터 패스.
-           */
-          labelPath: {
-            type: String,
-            value: 'description'
-          },
-
-          /**
-           * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
-           */
-          valuePath: {
-            type: String,
-            value: 'id'
-          },
-
-          /**
-           * 쿼리 페이지
-           */
-          page: {
-            type: Number,
-            value: 1
-          },
-
-          /**
-           * 페이지 당 레코드 수 
-           */
-          limit: {
-            type: Number,
-            value: 1000
-          },
-
-          /**
-           * Resource URL
-           */
-          resourceUrl: {
-            type: String
-          },
-
-          /**
-           * 참조하는 resource의 name
-           */
-          resourceName: {
-            type: String
-          },
-
-          /**
-           * 참조하는 Resource의 type
-           * Menu Or Entity
-           */
-          resourceType: {
-            type: String,
-            observer: '_resourceTypeChanged'
-          },
-
-
-          /**
-           * Response 중에 데이터 프로퍼티
-           */
-          itemsProp: {
-            type: String,
-            value: 'items'
-          },
-
-          /**
-           * 검색 결과 
-           */
-          items: {
-            type: Array,
-            notify: true
-          },
-
-          /**
-           * 조회 필드
-           */
-          selectFields: {
-            type: String,
-            value: 'id,name,description'
-          },
-
-          /**
-           * 쿼리 조건
-           */
-          queryFields: {
-            type: Array
-          },
-
-          /**
-           * 소팅 조건
-           */
-          sortFields: {
-            type: Array
-          }
-        },
-
-        listeners: {
-          'combo.things-combo-opened' : '_dropdownOpenHandler',
-          'resource.things-ajax-response' : '_responseHandler',
-          'resource-url-ajax.things-ajax-response' : '_urlResponseHandler'
+      properties: {
+        /**
+         * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         */
+        name: {
+          type: String
         },
 
         /**
-         * resource type에 따라 resourceName과 일치하는 데이터를 추출
+         * element에 표시할 라벨 
          */
-        _resourceTypeChanged: function(resourceType) {
-          if(resourceType && this.resourceName) {
-            var resourceName = this.resourceName;
-            var resourceUrlAjax = this.$['resource-url-ajax'];
-
-            resourceUrlAjax.queryFields = [{
-              name: 'name',
-              operator: 'eq',
-              value: resourceName
-            }]
-
-            switch(resourceType) {
-              case 'Entity':
-                resourceUrlAjax.resourceUrl = 'entities';
-                break;
-              
-              case 'Menu':
-                resourceUrlAjax.resourceUrl = 'menus';
-                break;
-            }
-
-            resourceUrlAjax.generateRequest();
-          }
+        label: {
+          type: String,
+          value: 'Select ...'
         },
 
         /**
-         * resourceName, resrouceType에 따라 resourceUrl을 추출
+         * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
          */
-        _urlResponseHandler: function(response) {
-          if(this.resourceType.indexOf('Entity') >= 0) {
-            this.resourceUrl = response.detail.items[0].search_url;
-          } else if (this.resourceType.indexOf('Menu') >= 0) {
-            this.resourceUrl = response.detail.items[0].resource_url;
-          }
+        value: {
+          type: String,
+          notify: true
         },
 
         /**
-         * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
+         * 코드 데이터 중에서 Code Selector에 표시할 정보에 대한 데이터 패스.
          */
-        _dropdownOpenHandler: function(e) {
-          if(!this.items || this.items.length == 0) {
-            this.$.resource.generateRequest();
-          }
+        labelPath: {
+          type: String,
+          value: 'description'
         },
 
         /**
-         * Resource 정보 결과 도착시 ...
+         * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
          */
-        _responseHandler: function(e) {
-          this.items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
+        valuePath: {
+          type: String,
+          value: 'id'
+        },
+
+        /**
+         * 쿼리 페이지
+         */
+        page: {
+          type: Number,
+          value: 1
+        },
+
+        /**
+         * 페이지 당 레코드 수 
+         */
+        limit: {
+          type: Number,
+          value: 1000
+        },
+
+        /**
+         * Resource URL
+         */
+        resourceUrl: {
+          type: String
+        },
+
+        /**
+         * 참조하는 resource의 name
+         */
+        resourceName: {
+          type: String
+        },
+
+        /**
+         * 참조하는 Resource의 type
+         * Menu Or Entity
+         */
+        resourceType: {
+          type: String,
+          observer: '_resourceTypeChanged'
+        },
+
+        /**
+         * Response 중에 데이터 프로퍼티
+         */
+        itemsProp: {
+          type: String,
+          value: 'items'
+        },
+
+        /**
+         * 검색 결과 
+         */
+        items: {
+          type: Array,
+          notify: true
+        },
+
+        /**
+         * 조회 필드
+         */
+        selectFields: {
+          type: String,
+          value: 'id,name,description'
+        },
+
+        /**
+         * 쿼리 조건
+         */
+        queryFields: {
+          type: Array
+        },
+
+        /**
+         * 소팅 조건
+         */
+        sortFields: {
+          type: Array
         }
+      },
 
-      })
-    })();
+      listeners: {
+        'combo.things-combo-opened' : '_dropdownOpenHandler',
+        'resource.things-ajax-response' : '_responseHandler',
+        'resource-url-ajax.things-ajax-response' : '_urlResponseHandler'
+      },
+
+      /**
+       * resource type에 따라 resourceName과 일치하는 데이터를 추출
+       */
+      _resourceTypeChanged: function(resourceType) {
+        if(resourceType && this.resourceName) {
+          var resourceUrlAjax = this.$['resource-url-ajax'];
+          resourceUrlAjax.resourceUrl = (resourceType && resourceType == 'Menu') ? 'menus' : 'entities';
+          resourceUrlAjax.queryFields = [ {
+            name: 'name',
+            operator: 'eq',
+            value: this.resourceName
+          } ];          
+          resourceUrlAjax.generateRequest();
+        }
+      },
+
+      /**
+       * resourceName, resrouceType에 따라 resourceUrl을 추출
+       */
+      _urlResponseHandler: function(response) {
+        if(this.resourceType.indexOf('Entity') >= 0) {
+          this.resourceUrl = response.detail.items[0].search_url;
+        } else if (this.resourceType.indexOf('Menu') >= 0) {
+          this.resourceUrl = response.detail.items[0].resource_url;
+        }
+      },
+
+      /**
+       * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
+       */
+      _dropdownOpenHandler: function(e) {
+        if(!this.items || this.items.length == 0) {
+          this.$.resource.generateRequest();
+        }
+      },
+
+      /**
+       * Resource 정보 결과 도착시 ...
+       */
+      _responseHandler: function(e) {
+        this.items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
+      }
+    });
   </script>
 </dom-module>

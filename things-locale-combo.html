@@ -26,7 +26,7 @@ Example:
 			}
 		</style>
 
-		<things-i18n-msg msgid="button.language" msg="{{language}}" hidden>language</things-i18n-msg>
+		<things-i18n-msg msgid="label.language" msg="{{language}}" hidden>Language</things-i18n-msg>
 
 		<things-code-combo 
 			id="code-selector" 
@@ -66,29 +66,39 @@ Example:
 				 */
 				selectedLocale: {
 					type: String,
-					notify:true,
-					value:'en-US'
+					notify: true,
+					value: 'en-US'
 				},
-				localeItems:{
+
+				/**
+				 * localeItems
+				 */
+				localeItems: {
 					type: Array
 				}
 			},
+
 			listeners: {
 				'code-selector.things-combo-value-changed' : '_onComboValueChanged'
 			},
+			
 			/**
 			 * Combo 값이 변경될 때 
 			 */
 			_onComboValueChanged: function(event) {
-				if(event.detail.value){
-					this.set('selectedLocale',event.detail.value);
-				}else{
-					var localeItems = [{name : 'ko-KR', description: '한글'},
-										{name : 'en-US', description: 'English'},
-										{name : 'zh-CN', description: '中文'}];
+				if(event.detail.value) {
+					this.set('selectedLocale', event.detail.value);
+				} else {
+					var localeItems = [ {
+						name : 'ko-KR', description: '한글'
+					}, {
+						name : 'en-US', description: 'English'
+					}, {
+						name : 'zh-CN', description: '中文'
+					} ];
 
-					this.set('selectedLocale',event.detail.value||"en-US");
-					this.set('localeItems',localeItems);
+					this.set('selectedLocale', event.detail.value || 'en-US');
+					this.set('localeItems', localeItems);
 				}
 			},
 
@@ -98,7 +108,6 @@ Example:
 			getLocale: function() {
 				return this.selectedLocale
 			}
-
 		});
 	</script>
 </dom-module>

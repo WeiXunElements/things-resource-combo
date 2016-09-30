@@ -21,7 +21,6 @@
 -->
 <dom-module id="things-code-combo">
   <template>
-
     <things-combo 
       id="combo" 
       name="[[name]]" 
@@ -39,11 +38,11 @@
       resource-action="show_by_name"
       params="[[params]]">
     </things-ajax>
-
   </template>
 
   <script type="text/javascript">
     Polymer({
+
       is: "things-code-combo",
 
       properties: {
@@ -123,7 +122,6 @@
       _onResponse: function(e) {
         this.items = e.detail.items;
       }
-
     });
   </script>
 </dom-module>
