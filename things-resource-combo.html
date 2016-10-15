@@ -182,13 +182,20 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
       _resourceTypeChanged: function(resourceType) {
         if(resourceType && this.resourceName) {
           var resourceUrlAjax = this.$['resource-url-ajax'];
-          resourceUrlAjax.resourceUrl = (resourceType && resourceType == 'Menu') ? 'menus' : 'entities';
-          resourceUrlAjax.queryFields = [ {
-            name: 'name',
-            operator: 'eq',
-            value: this.resourceName
-          } ];          
-          resourceUrlAjax.generateRequest();
+
+          if(resourceType == 'Url') {
+            this.resourceUrl = this.resourceName;
+
+          } else {
+            resourceUrlAjax.resourceUrl = (resourceType && resourceType == 'Menu') ? 'menus' : 'entities';
+            resourceUrlAjax.queryFields = [ {
+              name: 'name',
+              operator: 'eq',
+              value: this.resourceName
+            } ];
+
+            resourceUrlAjax.generateRequest();
+          }
         }
       },
 
