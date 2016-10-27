@@ -33,7 +33,8 @@
 			label="{{lDefaultScreen}}" 
 			value="{{value}}" 
 			items="[[items]]" 
-			label-path="name">
+			label-path="name"
+			tabindex="[[tabindex]]">
 		</things-combo>
 
 		<iron-localstorage name="[[storageName]]" value="{{defaultScreen}}"></iron-localstorage>
@@ -95,6 +96,12 @@
 				defaultScreen: {
 					type: String,
 					notify: true
+				},
+				/**
+				* tab index
+				*/
+				tabindex:{
+					type: String
 				}
 			},
 
