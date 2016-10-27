@@ -35,7 +35,8 @@ Example:
 			items ="[[localeItems]]"
 			code-name="LOCALE" 
 			label-path="description" 
-			value-path="name">
+			value-path="name"
+			tabindex ="[[tabindex]]">
 		</things-code-combo>
 
 		<iron-localstorage name="[[storageName]]" value="{{selectedLocale}}"></iron-localstorage>
@@ -75,6 +76,12 @@ Example:
 				 */
 				localeItems: {
 					type: Array
+				},
+				/**
+				* tab index
+				*/
+				tabindex:{
+					type: String
 				}
 			},
 
