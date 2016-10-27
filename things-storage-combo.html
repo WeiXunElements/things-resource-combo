@@ -24,7 +24,8 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
       value="{{value}}" 
       items="{{items}}" 
       label-path="[[labelPath]]" 
-      value-path="[[valuePath]]">
+      value-path="[[valuePath]]"
+      tabindex="[[tabindex]]">
     </things-combo>
 
     <things-ajax
@@ -122,6 +123,12 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         lastResponse: {
           type: Object
+        },
+        /**
+         * tab index 추가
+         */
+        tabindex:{
+          type: String
         }
       },
 
