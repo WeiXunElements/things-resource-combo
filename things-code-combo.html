@@ -28,7 +28,8 @@
       value="{{value}}" 
       items="[[items]]" 
       label-path="[[labelPath]]" 
-      value-path="[[valuePath]]">
+      value-path="[[valuePath]]"
+      tabindex = "[[tabindex]]">
     </things-combo>
 
     <things-ajax
@@ -102,6 +103,12 @@
         params: {
           type: String,
           computed: '_computeParams(codeName)'
+        },
+        /**
+        *tab index
+        */
+        tabindex:{
+          type: String
         }
       },
 
