@@ -29,7 +29,11 @@
       items="[[items]]" 
       label-path="[[labelPath]]" 
       value-path="[[valuePath]]"
-      tab-index = "[[tabIndex]]">
+      tab-index = "[[tabIndex]]"
+      error-message$="[[errorMessage]]"
+      auto-validate$="[[autoValidate]]" 
+      required$="[[required]]"
+      is-valid="{{isValid}}">
     </things-combo>
 
     <things-ajax
@@ -109,6 +113,34 @@
         */
         tabIndex:{
           type: String
+        },
+        /**
+         * input field에 반드시 값이 포함되어야 함을 결정 합니다.
+         */
+        required: {
+          type: Boolean,
+          value: false
+        },
+        /**
+         * 자동 validation check 활성화 여부
+         */
+        autoValidate: {
+          type: Boolean,
+          value: false
+        },
+        /**
+         * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
+         */
+        isValid: {
+          type: Boolean,
+          value: true
+        },
+        /**
+         * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
+         */
+        errorMessage: {
+          type: String,
+          value: 'Invalid input'
         }
       },
 
@@ -128,6 +160,12 @@
       */
       _onResponse: function(e) {
         this.items = e.detail.items;
+      },
+      /**
+       * 수동 validation check function
+       */
+      validate: function() {
+        this.$.combo.validate();
       }
     });
   </script>
