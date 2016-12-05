@@ -28,7 +28,11 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
       items="{{items}}" 
       label-path="[[labelPath]]"
   		tab-index = "[[tabIndex]]"
-      value-path="[[valuePath]]">
+      value-path="[[valuePath]]"
+      error-message$="[[errorMessage]]"
+      auto-validate$="[[autoValidate]]" 
+      required$="[[required]]"
+      is-valid="{{isValid}}">
     </things-combo>
 
     <things-ajax
@@ -174,6 +178,34 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
          */
         tabIndex:{
           type: String
+        },
+        /**
+         * input field에 반드시 값이 포함되어야 함을 결정 합니다.
+         */
+        required: {
+          type: Boolean,
+          value: false
+        },
+        /**
+         * 자동 validation check 활성화 여부
+         */
+        autoValidate: {
+          type: Boolean,
+          value: false
+        },
+        /**
+         * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
+         */
+        isValid: {
+          type: Boolean,
+          value: true
+        },
+        /**
+         * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
+         */
+        errorMessage: {
+          type: String,
+          value: 'Invalid input'
         }
       },
 
@@ -231,6 +263,12 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
        */
       _responseHandler: function(e) {
         this.items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
+      },
+      /**
+       * 수동 validation check function
+       */
+      validate: function() {
+        this.$.combo.validate();
       }
     });
   </script>
