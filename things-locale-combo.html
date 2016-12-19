@@ -104,7 +104,7 @@ Example:
 						name : 'zh-CN', description: '中文'
 					} ];
 
-					this.set('selectedLocale', event.detail.value || 'en-US');
+					this.set('selectedLocale', event.detail.value || this.defaultLocale);
 					this.set('localeItems', localeItems);
 				}
 			},
