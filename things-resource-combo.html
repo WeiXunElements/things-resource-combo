@@ -55,7 +55,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
   <script type="text/javascript">
     Polymer({
-      is: "things-resource-combo",
+      is: 'things-resource-combo',
 
       properties: {
         /**
@@ -179,6 +179,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
         tabIndex:{
           type: String
         },
+        
         /**
          * input field에 반드시 값이 포함되어야 함을 결정 합니다.
          */
@@ -186,6 +187,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
           type: Boolean,
           value: false
         },
+
         /**
          * 자동 validation check 활성화 여부
          */
@@ -193,6 +195,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
           type: Boolean,
           value: false
         },
+
         /**
          * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
          */
@@ -200,12 +203,15 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
           type: Boolean,
           value: true
         },
+
         /**
          * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
          */
         errorMessage: {
           type: String,
-          value: 'Invalid input'
+          value: function() {
+            return Things.DataGlobal.t('text.invalid_input');
+          }
         }
       },
 
@@ -217,6 +223,8 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
       /**
        * resource type에 따라 resourceName과 일치하는 데이터를 추출
+       *
+       * @param {String} resourceType
        */
       _resourceTypeChanged: function(resourceType) {
         if(resourceType && this.resourceName) {
@@ -240,6 +248,8 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
       /**
        * resourceName, resrouceType에 따라 resourceUrl을 추출
+       *
+       * @param {Object} response
        */
       _urlResponseHandler: function(response) {
         if(this.resourceType.indexOf('Entity') >= 0) {
@@ -251,6 +261,8 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
       /**
        * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
+       *
+       * @param {Object} e
        */
       _dropdownOpenHandler: function(e) {
         if(!this.items || this.items.length == 0) {
@@ -260,10 +272,13 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
       /**
        * Resource 정보 결과 도착시 ...
+       *
+       * @param {Object} e
        */
       _responseHandler: function(e) {
         this.items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
       },
+
       /**
        * 수동 validation check function
        */

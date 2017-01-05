@@ -97,9 +97,10 @@
 					type: String,
 					notify: true
 				},
+
 				/**
-				* tab index
-				*/
+				 * tab index
+				 */
 				tabIndex:{
 					type: String
 				}
@@ -111,6 +112,8 @@
 
 			/**
 			 * 메뉴 조회 리스트 변경시 
+			 *
+			 * @param {Array} menus
 			 */
 			_menusChanged: function(menus) {
 				if(menus && menus.length > 0) {
@@ -124,7 +127,6 @@
 
 			/**
 			 * 메뉴 조회 후 response event listener
-			 *
 			 * defaultScreen 값이 있다면 해당 값의 name을 찾아 value에 초기화
 			 */
 			_ajaxResponsed: function() {
@@ -142,8 +144,9 @@
 
 			/**
 			 * things-combo value change event listener
-			 *
 			 * value가 변경 되면 해당 routing을 defaultScreen에 초기화
+			 *
+			 * @param {Object} event
 			 */
 			_comboValueChanged: function(event) {
 				var value = event.detail.value;

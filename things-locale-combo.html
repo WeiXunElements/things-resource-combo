@@ -77,6 +77,7 @@ Example:
 				localeItems: {
 					type: Array
 				},
+
 				/**
 				* tab index
 				*/
@@ -91,10 +92,13 @@ Example:
 			
 			/**
 			 * Combo 값이 변경될 때 
+			 *
+			 * @param {Object} event
 			 */
 			_onComboValueChanged: function(event) {
 				if(event.detail.value) {
 					this.set('selectedLocale', event.detail.value);
+
 				} else {
 					var localeItems = [ {
 						name : 'ko-KR', description: '한글'

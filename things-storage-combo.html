@@ -42,7 +42,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
 
   <script type="text/javascript">
     Polymer({
-      is: "things-storage-combo",
+      is: 'things-storage-combo',
 
       properties: {
         /**
@@ -112,22 +112,20 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         sortFields: {
           type: Array,
-          value: [{
-            field: 'name',
-            ascending: true
-          }]
+          value: [{ field: 'name', ascending: true }]
         },
 
         /**
-         * ajax 호출 후 response
+         * Ajax 호출 후 response
          */
         lastResponse: {
           type: Object
         },
+
         /**
-         * tab index 추가
+         * Tab index 추가
          */
-        tabIndex:{
+        tabIndex: {
           type: String
         }
       },
@@ -139,6 +137,8 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
 
       /**
        * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
+       *
+       * @param {Object} e
        */
       _dropdownOpenHandler: function(e) {
         if(!this.lastResponse || this.lastResponse == 0) {
@@ -148,6 +148,8 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
 
       /**
        * Storage 정보 결과 도착시 ...
+       *
+       * @param {Object} e
        */
       _responseHandler: function(e) {
         this.items = e.detail.items;

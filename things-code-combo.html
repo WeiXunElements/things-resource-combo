@@ -47,73 +47,74 @@
 
   <script type="text/javascript">
     Polymer({
-
-      is: "things-code-combo",
+      is: 'things-code-combo',
 
       properties: {
         /**
-        * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-        */
+         * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         */
         name : {
           type: String
         },
 
         /**
-        * element에 표시할 라벨 
-        */
+         * element에 표시할 라벨 
+         */
         label: {
           type: String
         },
 
         /**
-        * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-        */
+         * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         */
         value: {
           type: String,
           notify: true
         },
 
         /**
-        * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
-        */
+         * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
+         */
         labelPath: {
           type: String
         },
 
         /**
-        * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
-        */
+         * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
+         */
         valuePath: {
           type: String
         },
 
         /**
-        * code 명. code name으로 code 정보를 조회하는 URL을 구성한다.
-        */
+         * code 명. code name으로 code 정보를 조회하는 URL을 구성한다.
+         */
         codeName: {
           type: String
         },
 
         /**
-        * code items
-        */
+         * Code items
+         */
         items: {
           type: Array
         },
 
         /**
-        * Code 조회시 서버에 넘어가는 파라미터 (codeName)
-        */
+         * Code 조회시 서버에 넘어가는 파라미터 (codeName)
+         */
         params: {
           type: String,
           computed: '_computeParams(codeName)'
         },
+
         /**
-        *tab index
-        */
+         * Tab index
+         */
         tabIndex:{
           type: String
         },
+
         /**
          * input field에 반드시 값이 포함되어야 함을 결정 합니다.
          */
@@ -121,6 +122,7 @@
           type: Boolean,
           value: false
         },
+
         /**
          * 자동 validation check 활성화 여부
          */
@@ -128,6 +130,7 @@
           type: Boolean,
           value: false
         },
+
         /**
          * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
          */
@@ -135,6 +138,7 @@
           type: Boolean,
           value: true
         },
+
         /**
          * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
          */
@@ -149,18 +153,23 @@
       },
 
       /**
-      * parameter
-      */
+       * Code 조회시 필요한 parameter - codeName
+       *
+       * @param {String} codeName
+       */
       _computeParams: function(codeName) {
         return { name : codeName };
       },
 
       /**
-      * 코드 조회 결과 응답이 도착했을 경우
-      */
+       * 코드 조회 결과 응답이 도착했을 경우
+       *
+       * @param {Object} e
+       */
       _onResponse: function(e) {
         this.items = e.detail.items;
       },
+
       /**
        * 수동 validation check function
        */
