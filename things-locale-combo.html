@@ -10,10 +10,11 @@
 Example:
 
   <things-locale-combo 
-		id="locale-selector" 
-		storage-name="setting.locale" 
-		default-locale="{{globals.locale}}">
-  </things-locale-combo>
+    id="locale-selector" 
+    storage-name="setting.locale" 
+    default-locale="{{defaultLocale}}"
+    selected-locale="{{globals.locale}}">
+  </things-locale-combo> 
 
 @demo demo/index.html
 -->
@@ -26,7 +27,7 @@ Example:
 			}
 		</style>
 
-		<things-i18n-msg msgid="label.language" msg="{{language}}" hidden>Language</things-i18n-msg>
+		<things-i18n-msg msgid="label.language" msg="{{language}}" auto hidden>Language</things-i18n-msg>
 
 		<things-code-combo 
 			id="code-selector" 
@@ -36,7 +37,7 @@ Example:
 			code-name="LOCALE" 
 			label-path="description" 
 			value-path="name"
-  			tab-index = "[[tabIndex]]">
+			tab-index = "[[tabIndex]]">
 		</things-code-combo>
 
 		<iron-localstorage name="[[storageName]]" value="{{selectedLocale}}"></iron-localstorage>
