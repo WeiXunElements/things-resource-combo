@@ -8,7 +8,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
   Example:
 
-    <things-resource-combo 
+    <things-resource-combo
       name="user"
       label="Storage"
       resource-url="users"
@@ -16,21 +16,21 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
       value-path="login">
     </things-resource-combo>
 
-@demo ./things-resource-combo/demo/demo-things-resource-combo.html
+@demo demo/demo-things-resource-combo.html
 -->
 <dom-module id="things-resource-combo">
   <template>
-    <things-combo 
-      id="combo" 
-      name="{{name}}" 
-      label="[[label]]" 
-      value="{{value}}" 
-      items="{{items}}" 
+    <things-combo
+      id="combo"
+      name="{{name}}"
+      label="[[label]]"
+      value="{{value}}"
+      items="{{items}}"
       label-path="[[labelPath]]"
   		tab-index = "[[tabIndex]]"
       value-path="[[valuePath]]"
       error-message$="[[errorMessage]]"
-      auto-validate$="[[autoValidate]]" 
+      auto-validate$="[[autoValidate]]"
       required$="[[required]]"
       is-valid="{{isValid}}">
     </things-combo>
@@ -42,7 +42,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
     <things-ajax
       auto
-      id="resource" 
+      id="resource"
       resource-url="[[resourceUrl]]"
       resource-action="index"
       page="[[page]]"
@@ -66,7 +66,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
         },
 
         /**
-         * element에 표시할 라벨 
+         * element에 표시할 라벨
          */
         label: {
           type: String,
@@ -106,7 +106,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
         },
 
         /**
-         * 페이지 당 레코드 수 
+         * 페이지 당 레코드 수
          */
         limit: {
           type: Number,
@@ -145,7 +145,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
         },
 
         /**
-         * 검색 결과 
+         * 검색 결과
          */
         items: {
           type: Array,
@@ -179,7 +179,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
         tabIndex:{
           type: String
         },
-        
+
         /**
          * input field에 반드시 값이 포함되어야 함을 결정 합니다.
          */

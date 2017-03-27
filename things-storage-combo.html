@@ -8,22 +8,22 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
 
   Example:
 
-    <things-storage-combo 
+    <things-storage-combo
       name="storage"
       label="Storage">
     </things-storage-combo>
 
-@demo ./things-resource-combo/demo/demo-things-storage-combo.html
+@demo demo/demo-things-storage-combo.html
 -->
 <dom-module id="things-storage-combo">
   <template>
-    <things-combo 
-      id="combo" 
-      name="{{name}}" 
-      label="[[label]]" 
-      value="{{value}}" 
-      items="{{items}}" 
-      label-path="[[labelPath]]" 
+    <things-combo
+      id="combo"
+      name="{{name}}"
+      label="[[label]]"
+      value="{{value}}"
+      items="{{items}}"
+      label-path="[[labelPath]]"
       value-path="[[valuePath]]"
   		tab-index = "[[tabIndex]]">
     </things-combo>
@@ -53,7 +53,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
         },
 
         /**
-         * element에 표시할 라벨 
+         * element에 표시할 라벨
          */
         label: {
           type: String,
@@ -85,7 +85,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
         },
 
         /**
-         * 검색 결과 
+         * 검색 결과
          */
         items: {
           type: Array,
@@ -93,7 +93,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
         },
 
         /**
-         * 조회 필드 
+         * 조회 필드
          */
         selectFields: {
           type: String,
@@ -105,7 +105,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         queryFields: {
           type: Array
-        },          
+        },
 
         /**
          * 소팅 조건
