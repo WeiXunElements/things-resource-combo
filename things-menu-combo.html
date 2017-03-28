@@ -5,8 +5,16 @@
 <link rel="import" href="../things-combo/things-combo.html">
 <link rel="import" href="../things-ajax/things-ajax.html">
 
-<!-- 
+<!--
 	메뉴 콤보. things-ajax 컴퍼넌트를 이용하여 menu data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
+
+	Example:
+
+		<things-menu-combo
+			value="{{value}}">
+		</things-menu-combo>
+
+@demo demo/demo-things-menu-combo.html
 -->
 
 <dom-module id="things-menu-combo">
@@ -29,17 +37,17 @@
 		</things-ajax>
 
 		<things-combo
-			id="combo" 
-			label="{{lDefaultScreen}}" 
-			value="{{value}}" 
-			items="[[items]]" 
+			id="combo"
+			label="{{lDefaultScreen}}"
+			value="{{value}}"
+			items="[[items]]"
 			label-path="name"
-  			tab-index = "[[tabIndex]]">
+  		tab-index ="[[tabIndex]]">
 		</things-combo>
 
 		<iron-localstorage name="[[storageName]]" value="{{defaultScreen}}"></iron-localstorage>
 	</template>
-	
+
 	<script>
 		Polymer({
 			is: 'things-menu-combo',
@@ -51,7 +59,8 @@
 
 			properties: {
 				/**
-				 * 메뉴 검색 결과 
+				 * 메뉴 검색 결과
+				 * @type: Array
 				 */
 				menus: {
 					type: Array
@@ -59,6 +68,7 @@
 
 				/**
 				 * menu items
+				 * @type: Array
 				 */
 				items: {
 					type: Array
@@ -66,13 +76,16 @@
 
 				/**
 				 * routing data
+				 * @type: String
 				 */
 				value: {
-					type: String
+					type: String,
+					notify: true
 				},
 
 				/**
 				 * ajax query field
+				 * @type: Array
 				 */
 				queryFields: {
 					type: Array,
@@ -92,6 +105,7 @@
 
 				/**
 				 * defaultScreen routing info
+				 * @type: String
 				 */
 				defaultScreen: {
 					type: String,
@@ -100,6 +114,7 @@
 
 				/**
 				 * tab index
+				 * @type: String
 				 */
 				tabIndex:{
 					type: String
@@ -111,7 +126,7 @@
 			],
 
 			/**
-			 * 메뉴 조회 리스트 변경시 
+			 * 메뉴 조회 리스트 변경시
 			 *
 			 * @param {Array} menus
 			 */

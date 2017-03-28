@@ -5,18 +5,18 @@
 <link rel="import" href="things-code-combo.html">
 
 <!--
-다국어 설정을 위한 Locale Selector 
+	다국어 설정을 위한 Locale Selector
 
-Example:
+	Example:
 
-  <things-locale-combo 
-    id="locale-selector" 
-    storage-name="setting.locale" 
-    default-locale="{{defaultLocale}}"
-    selected-locale="{{globals.locale}}">
-  </things-locale-combo> 
+		<things-locale-combo
+			id="locale-selector"
+			storage-name="setting.locale"
+			default-locale="{{defaultLocale}}"
+			selected-locale="{{globals.locale}}">
+		</things-locale-combo>
 
-@demo demo/index.html
+@demo demo/demo-things-locale-combo.html
 -->
 
 <dom-module id="things-locale-combo">
@@ -29,13 +29,13 @@ Example:
 
 		<things-i18n-msg msgid="label.language" msg="{{language}}" auto hidden>Language</things-i18n-msg>
 
-		<things-code-combo 
-			id="code-selector" 
-			label="[[language]]" 
+		<things-code-combo
+			id="code-selector"
+			label="[[language]]"
 			value="[[selectedLocale]]"
 			items ="[[localeItems]]"
-			code-name="LOCALE" 
-			label-path="description" 
+			code-name="LOCALE"
+			label-path="description"
 			value-path="name"
 			tab-index = "[[tabIndex]]">
 		</things-code-combo>
@@ -50,6 +50,7 @@ Example:
 			properties: {
 				/**
 				 * Local Storage Name
+				 * @type: String
 				 */
 				storageName: {
 					type: String,
@@ -58,13 +59,15 @@ Example:
 
 				/**
 				 * Default Locale
+				 * @type: String
 				 */
 				defaultLocale: {
 					type: String
 				},
 
 				/**
-				 * 선택된 Locale 값 
+				 * 선택된 Locale 값
+				 * @type: String
 				 */
 				selectedLocale: {
 					type: String,
@@ -74,6 +77,7 @@ Example:
 
 				/**
 				 * localeItems
+				 * @type: Array
 				 */
 				localeItems: {
 					type: Array
@@ -81,6 +85,7 @@ Example:
 
 				/**
 				* tab index
+				* @type: String
 				*/
 				tabIndex:{
 					type: String
@@ -90,9 +95,9 @@ Example:
 			listeners: {
 				'code-selector.things-combo-value-changed' : '_onComboValueChanged'
 			},
-			
+
 			/**
-			 * Combo 값이 변경될 때 
+			 * Combo 값이 변경될 때
 			 *
 			 * @param {Object} event
 			 */
@@ -115,7 +120,7 @@ Example:
 			},
 
 			/**
-			 * 선택된 Locale 값을 리턴 
+			 * 선택된 Locale 값을 리턴
 			 */
 			getLocale: function() {
 				return this.selectedLocale

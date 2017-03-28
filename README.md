@@ -1,6 +1,18 @@
 # things-resource-combo
 
-An element providing a starting point for your own reusable Polymer elements.
+#### things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
+
+  Example:
+
+```html
+    <things-resource-combo
+      name="user"
+      label="Storage"
+      resource-url="users"
+      label-path="name"
+      value-path="login">
+    </things-resource-combo>
+```
 
 
 ## Dependencies

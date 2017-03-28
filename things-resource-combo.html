@@ -60,6 +60,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
       properties: {
         /**
          * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         * @type: String
          */
         name: {
           type: String
@@ -67,6 +68,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * element에 표시할 라벨
+         * @type: String
          */
         label: {
           type: String,
@@ -75,6 +77,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         * @type: String
          */
         value: {
           type: String,
@@ -83,6 +86,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 코드 데이터 중에서 Code Selector에 표시할 정보에 대한 데이터 패스.
+         * @type: String
          */
         labelPath: {
           type: String,
@@ -91,6 +95,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
+         * @type: String
          */
         valuePath: {
           type: String,
@@ -99,6 +104,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 쿼리 페이지
+         * @type: Number
          */
         page: {
           type: Number,
@@ -107,6 +113,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 페이지 당 레코드 수
+         * @type: Number
          */
         limit: {
           type: Number,
@@ -115,6 +122,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * Resource URL
+         * @type: String
          */
         resourceUrl: {
           type: String
@@ -122,6 +130,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 참조하는 resource의 name
+         * @type: String
          */
         resourceName: {
           type: String
@@ -130,6 +139,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
         /**
          * 참조하는 Resource의 type
          * Menu Or Entity
+         * @type: String
          */
         resourceType: {
           type: String,
@@ -138,6 +148,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * Response 중에 데이터 프로퍼티
+         * @type: String
          */
         itemsProp: {
           type: String,
@@ -146,6 +157,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 검색 결과
+         * @type: Array
          */
         items: {
           type: Array,
@@ -154,6 +166,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 조회 필드
+         * @type: String
          */
         selectFields: {
           type: String,
@@ -162,6 +175,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 쿼리 조건
+         * @type: Array
          */
         queryFields: {
           type: Array
@@ -169,12 +183,14 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 소팅 조건
+         * @type: Array
          */
         sortFields: {
           type: Array
         },
         /**
          * tab index 추가
+         * @type: String
          */
         tabIndex:{
           type: String
@@ -182,6 +198,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * input field에 반드시 값이 포함되어야 함을 결정 합니다.
+         * @type: Boolean
          */
         required: {
           type: Boolean,
@@ -190,6 +207,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * 자동 validation check 활성화 여부
+         * @type: Boolean
          */
         autoValidate: {
           type: Boolean,
@@ -198,6 +216,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
+         * @type: Boolean
          */
         isValid: {
           type: Boolean,
@@ -206,6 +225,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
         /**
          * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
+         * @type: String
          */
         errorMessage: {
           type: String,
