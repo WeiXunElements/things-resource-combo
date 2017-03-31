@@ -53,6 +53,7 @@
       properties: {
         /**
          * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         * ********
          * @type: String
          */
         name : {
@@ -61,6 +62,7 @@
 
         /**
          * element에 표시할 라벨
+         * ********
          * @type: String
          */
         label: {
@@ -69,6 +71,7 @@
 
         /**
          * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         * ********
          * @type: String
          */
         value: {
@@ -78,6 +81,7 @@
 
         /**
          * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
+         * ********
          * @type: String
          */
         labelPath: {
@@ -86,6 +90,7 @@
 
         /**
          * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
+         * ********
          * @type: String
          */
         valuePath: {
@@ -94,6 +99,7 @@
 
         /**
          * code 명. code name으로 code 정보를 조회하는 URL을 구성한다.
+         * ********
          * @type: String
          */
         codeName: {
@@ -102,6 +108,7 @@
 
         /**
          * Code items
+         * ********
          * @type: Array
          */
         items: {
@@ -110,6 +117,7 @@
 
         /**
          * Code 조회시 서버에 넘어가는 파라미터 (codeName)
+         * ********
          * @type: String
          */
         params: {
@@ -119,6 +127,7 @@
 
         /**
          * Tab index
+         * ********
          * @type: String
          */
         tabIndex:{
@@ -127,6 +136,7 @@
 
         /**
          * input field에 반드시 값이 포함되어야 함을 결정 합니다.
+         * ********
          * @type: Boolean
          */
         required: {
@@ -136,7 +146,9 @@
 
         /**
          * 자동 validation check 활성화 여부
+         * ********
          * @type: Boolean
+         *
          */
         autoValidate: {
           type: Boolean,
@@ -145,6 +157,7 @@
 
         /**
          * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
+         * ********
          * @type: Boolean
          */
         isValid: {
@@ -154,6 +167,7 @@
 
         /**
          * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
+         * ********
          * @type: String
          */
         errorMessage: {
@@ -162,6 +176,7 @@
         },
         /**
          * readonly or not
+         * ********
          * @type: Boolean
          */
         readonly: {
@@ -194,6 +209,7 @@
 
       /**
        * 수동 validation check function
+       * ********
        */
       validate: function() {
         this.$.combo.validate();
