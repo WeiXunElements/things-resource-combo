@@ -316,7 +316,17 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
        * @param {Object} e
        */
       _responseHandler: function(e) {
-        this.items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
+        var items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
+        if(items && items.length > 0) {
+          items.forEach(function(item) {
+            if(!item.name) {
+              item.name = item[this.valuePath];
+              item.description = item[this.labelPath];
+            }
+          }.bind(this));
+        }
+
+        this.items = items;
       },
 
       /**
