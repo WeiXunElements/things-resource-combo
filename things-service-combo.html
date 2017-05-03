@@ -4,21 +4,22 @@
 <link rel="import" href="../things-combo/things-combo.html">
 
 <!--
-things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
+things-service-combo. 
+things-ajax 컴퍼넌트를 이용하여 서비스를 호출하여 데이터를 조회하여 콤보박스의 형태로 출력하고 선택한 값을 Input Field에 표시하는 컴퍼넌트
 
   Example:
 
-    <things-resource-combo
+    <things-service-combo
       name="user"
       label="Storage"
       resource-url="users"
       label-path="name"
       value-path="login">
-    </things-resource-combo>
+    </things-service-combo>
 
-@demo demo/demo-things-resource-combo.html
+@demo demo/demo-things-service-combo.html
 -->
-<dom-module id="things-resource-combo">
+<dom-module id="things-service-combo">
   <template>
     <things-combo
       id="combo"
@@ -55,7 +56,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
 
   <script type="text/javascript">
     Polymer({
-      is: 'things-resource-combo',
+      is: 'things-service-combo',
 
       properties: {
         /**
@@ -244,7 +245,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
         },
 
         /**
-         * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
+         * validation check를 통해 isValid의 값이 false일 때 화면에 나타나는 errorMessage
          * ********
          * @type: String
          */
@@ -317,7 +318,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
        * @param {Object} e
        */
       _responseHandler: function(e) {
-        var items = this.itemsProp ? (e.detail[this.itemsProp] ? e.detail[this.itemsProp] : e.detail) : e.detail;
+        var items = this.itemsProp ? e.detail[this.itemsProp] : e.detail;
         if(items && items.length > 0) {
           items.forEach(function(item) {
             if(!item.name) {

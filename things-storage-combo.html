@@ -25,12 +25,12 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
       items="{{items}}"
       label-path="[[labelPath]]"
       value-path="[[valuePath]]"
-  		tab-index = "[[tabIndex]]">
+      tab-index = "[[tabIndex]]">
     </things-combo>
 
     <things-ajax
-      id="storage"
       auto
+      id="storage"
       resource-url="storage_infos"
       resource-action="index"
       select-fields="[[selectFields]]"
@@ -159,7 +159,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
 
       /**
        * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
-       *
+       * ********
        * @param {Object} e
        */
       _dropdownOpenHandler: function(e) {
@@ -170,7 +170,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
 
       /**
        * Storage 정보 결과 도착시 ...
-       *
+       * ********
        * @param {Object} e
        */
       _responseHandler: function(e) {

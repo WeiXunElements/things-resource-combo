@@ -166,15 +166,6 @@
         },
 
         /**
-         * validation check를 통해 isValid의 값이 false일때 화면에 나타나는 errorMessage
-         * ********
-         * @type: String
-         */
-        errorMessage: {
-          type: String,
-          value: 'Invalid input'
-        },
-        /**
          * readonly or not
          * ********
          * @type: Boolean
@@ -182,6 +173,18 @@
         readonly: {
           type: Boolean,
           value: false
+        },
+
+        /**
+         * validation check를 통해 isValid의 값이 false일 때 화면에 나타나는 errorMessage
+         * ********
+         * @type: String
+         */
+        errorMessage: {
+          type: String,
+          value: function() {
+            return Things.DataGlobal.t('text.invalid_input');
+          }
         }
       },
 
@@ -191,7 +194,7 @@
 
       /**
        * Code 조회시 필요한 parameter - codeName
-       *
+       * ********
        * @param {String} codeName
        */
       _computeParams: function(codeName) {
@@ -200,7 +203,7 @@
 
       /**
        * 코드 조회 결과 응답이 도착했을 경우
-       *
+       * ********
        * @param {Object} e
        */
       _onResponse: function(e) {
