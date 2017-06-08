@@ -41,7 +41,7 @@
 		</things-code-combo>
 
 		<iron-localstorage name="[[storageName]]" value="{{globals.locale}}" on-iron-localstorage-load-empty="onLocaleEmpty"></iron-localstorage>
-		<things-i18n-src></things-i18n-src>
+		<things-i18n-src host="[[host]]" src-url="[[srcUrl]]"></things-i18n-src>
 	</template>
 
 	<script>
@@ -49,6 +49,24 @@
 			is: 'things-locale-combo',
 
 			properties: {
+				/**
+				 * things-i18n-src에서 사용될 host정보, host가 있으면 host를 사용하고 없으면 globals.baseUrl을 사용한다.
+				 * ******
+				 * @type {String}
+				 */
+				host: {
+					type: String
+				},
+
+				/**
+				 * things-i18n-src에서 사용될 srcUrl, host정보 용어 호출 URL
+				 * *****
+				 * @type {String}
+				 */
+				srcUrl: {
+					type: String,
+					value: 'terminologies/resource'
+				},
 				/**
 				 * Local Storage Name
 				 * ********
