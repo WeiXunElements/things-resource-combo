@@ -3,7 +3,7 @@
 
 <link rel="import" href="../things-i18n-msg/things-i18n-msg.html">
 <link rel="import" href="things-code-combo.html">
-
+<link rel="import" href="../things-global-behavior/things-global-behavior.html">
 <!--
 	다국어 설정을 위한 Locale Selector
 
@@ -40,7 +40,8 @@
 			tab-index = "[[tabIndex]]">
 		</things-code-combo>
 
-		<iron-localstorage name="[[storageName]]" value="{{selectedLocale}}"></iron-localstorage>
+		<iron-localstorage name="[[storageName]]" value="{{globals.locale}}" on-iron-localstorage-load-empty="onLocaleEmpty"></iron-localstorage>
+		<things-i18n-src></things-i18n-src>
 	</template>
 
 	<script>
@@ -50,7 +51,7 @@
 			properties: {
 				/**
 				 * Local Storage Name
-         * ********
+				 * ********
 				 * @type: String
 				 */
 				storageName: {
@@ -59,9 +60,9 @@
 				},
 
 				/**
-				 * Default Locale
-         * ********
-				 * @type: String
+				 * 기본 locale
+				 * *******
+				 * @type {String}
 				 */
 				defaultLocale: {
 					type: String
@@ -69,18 +70,17 @@
 
 				/**
 				 * 선택된 Locale 값
-         * ********
+				 * ********
 				 * @type: String
 				 */
 				selectedLocale: {
 					type: String,
-					notify: true,
-					value: 'en-US'
+					notify: true
 				},
 
 				/**
 				 * localeItems
-         * ********
+				 * ********
 				 * @type: Array
 				 */
 				localeItems: {
@@ -89,27 +89,51 @@
 
 				/**
 				* tab index
-        * ********
+				* ********
 				* @type: String
 				*/
 				tabIndex:{
 					type: String
 				}
 			},
+			behaviors: [
+				Things.GlobalBehavior
+			],
 
 			listeners: {
 				'code-selector.things-combo-value-changed' : '_onComboValueChanged'
 			},
-
+			/**
+			 * Locale 설정이 안 된 경우 - 기본 로케일로 설정
+			 * ******
+			 */
+			onLocaleEmpty: function() {
+				if(this.defaultLocale){
+					this.set('selectedLocale', this.defaultLocale);
+				}else{
+					var language = navigator.language;
+					var parsedLocale ='';
+					if(language.indexOf('ko') == 0) {
+						parsedLocale= 'ko-KR';
+					} else if (language.indexOf('en') == 0) {
+						parsedLocale= 'en-US';
+					} else if (language.indexOf('zh') == 0) {
+						parsedLocale= 'zh-CN';
+					} else {
+						parsedLocale= 'en-US';
+					}
+					this.set('selectedLocale', parsedLocale);
+				}
+				this.set('globals.locale',this.selectedLocale);
+			},
 			/**
 			 * Combo 값이 변경될 때
-			 * *******
+			 ********
 			 * @param {Object} event
 			 */
 			_onComboValueChanged: function(event) {
 				if(event.detail.value) {
 					this.set('selectedLocale', event.detail.value);
-
 				} else {
 					var localeItems = [ {
 						name : 'ko-KR', description: '한글'
@@ -122,6 +146,7 @@
 					this.set('selectedLocale', event.detail.value || this.defaultLocale);
 					this.set('localeItems', localeItems);
 				}
+				this.set('globals.locale',this.selectedLocale);
 			},
 
 			/**
