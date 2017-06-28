@@ -1,6 +1,6 @@
 # things-resource-combo
 
-## things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
+## This is a component that displays the resource data using the things-ajax component, prints it in the form of a combo box, and displays the selected value in the input field.
 
 Example:
 
@@ -16,7 +16,7 @@ Example:
 
 # things-code-combo
 
-## 서버에 저장되어 있는 Common 코드 정보를 조회하여 콤보로 표시하는 컴포넌트
+## This is a component that checks common code information stored in the server and displays it in combo.
 
 Example:
 ```html
@@ -32,7 +32,7 @@ Example:
 
 # things-locale-combo
 
-## 다국어 설정을 위한 Locale Selector
+## This is a Locale Selector for multilingual configuration.
 ```html
 Example:
 
@@ -44,8 +44,9 @@ Example:
   </things-locale-combo>
 ```
 
-# things-storage-combo.
-## things-ajax 컴퍼넌트를 이용하여 storage_infos의 data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
+# things-storage-combo
+
+## This is a component that checks the data of storage_infos using the things-ajax component, prints it as a combo box, and displays the selected value in the input field.
 
 Example:
 ```html
@@ -56,7 +57,8 @@ Example:
 ```
 
 #	things-menu-combo
-## things-ajax 컴퍼넌트를 이용하여 menu data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
+
+## This is a component that checks the menu data using the things-ajax component, prints it as a combo box, and displays the selected value in the input field.
 
 Example:
 ```html
@@ -67,8 +69,7 @@ Example:
 
 ## Dependencies
 
-Element dependencies are managed via [Bower](http://bower.io/). You can
-install that via:
+Element dependencies are managed via [Bower](http://bower.io/). You can install that via:
 
     npm install -g bower
 
@@ -91,33 +92,3 @@ And you can run it via:
 
 Once running, you can preview your element at
 `http://localhost:8080/components/things-resource-combo/`, where `things-resource-combo` is the name of the directory containing it.
-
-
-## Testing Your Element
-
-Simply navigate to the `/test` directory of your element to run its tests. If
-you are using Polyserve: `http://localhost:8080/components/things-resource-combo/test/`
-
-### web-component-tester
-
-The tests are compatible with [web-component-tester](https://github.com/Polymer/web-component-tester).
-Install it via:
-
-    npm install -g web-component-tester
-
-Then, you can run your tests on _all_ of your local browsers via:
-
-    wct
-
-#### WCT Tips
-
-`wct -l chrome` will only run tests in chrome.
-
-`wct -p` will keep the browsers alive after test runs (refresh to re-run).
-
-`wct test/some-file.html` will test only the files you specify.
-
-
-## Yeoman support
-
-If you'd like to use Yeoman to scaffold your element that's possible. The official [`generator-polymer`](https://github.com/yeoman/generator-polymer) generator has a [`seed`](https://github.com/yeoman/generator-polymer#seed) subgenerator.
