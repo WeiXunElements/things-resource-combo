@@ -1,13 +1,4 @@
 <!doctype html>
-<!--
-@license
-Copyright (c) 2016 The Things Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at https://github.com/hatiolab/things-elidom.git/LICENSE.txt
-The complete set of authors may be found at https://github.com/hatiolab/things-elidom.git/AUTHORS.txt
-The complete set of contributors may be found at https://github.com/hatiolab/things-elidom.git/CONTRIBUTORS.txt
-Code distributed by Hatiolab as part of the things project is also
-subject to an additional IP rights grant found at https://github.com/hatiolab/things-elidom.git/PATENTS.txt
--->
 <html>
 <head>
 
@@ -18,14 +9,14 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
   <title>things-code-combo demo</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  
+
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../paper-input/paper-input.html">
   <link rel="import" href="../../paper-styles/color.html">
   <link rel="import" href="../../paper-styles/demo-pages.html">
   <link rel="import" href="../../paper-toast/paper-toast.html">
   <link rel="import" href="../../paper-button/paper-button.html">
-  
+
   <link rel="import" href="../../things-spinner/things-spinner.html">
   <link rel="import" href="../../things-setting/things-setting.html">
   <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
@@ -93,12 +84,12 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
 
           <h4>Things Code Combo</h4>
 
-          <things-code-combo 
-            id="code-combo" 
-            label="Language" 
-            value="en-US" 
-            code-name="LOCALE" 
-            label-path="description" 
+          <things-code-combo
+            id="code-combo"
+            label="Language"
+            value="en-US"
+            code-name="LOCALE"
+            label-path="description"
             value-path="name">
           </things-code-combo>
 
@@ -111,7 +102,7 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
               }
             });
             app.openSetting = function  (argument) {
-               app.$.setting.open(); 
+               app.$.setting.open();
             }
           </script>
         </template>

@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
   <title>things-code-combo demo</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  
+
   <link rel="import" href="../../polymer/polymer.html">
   <link rel="import" href="../../paper-input/paper-input.html">
   <link rel="import" href="../../paper-styles/color.html">
@@ -84,9 +84,9 @@ subject to an additional IP rights grant found at https://github.com/hatiolab/th
         <template is="dom-bind" id="app">
           <paper-input label="Selected Value" value="{{selectedLocale}}"></paper-input>
           <h4>Things Locale Code Combo</h4>
-          <things-locale-combo 
-            id="locale-combo" 
-            storage-name="setting.locale" 
+          <things-locale-combo
+            id="locale-combo"
+            storage-name="setting.locale"
             default-locale="en-US"
             selected-locale="{{selectedLocale}}">
           </things-locale-combo>
