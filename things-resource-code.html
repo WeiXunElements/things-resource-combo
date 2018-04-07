@@ -45,7 +45,6 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
     </things-ajax>
 
     <things-ajax
-      auto
       id="resource"
       resource-url="[[resourceUrl]]"
       resource-action="index"
@@ -128,7 +127,7 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
          */
         limit: {
           type: Number,
-          value: 1000
+          value: 10000
         },
 
         /**
@@ -186,7 +185,6 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
          */
         selectFields: {
           type: String,
-          value: 'name,description',
           observer: '_selectFieldsChanged'
         },
 
@@ -312,15 +310,26 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
        * @param {Object} response
        */
       _urlResponseHandler: function(response) {
-        if(this.resourceType.indexOf('Entity') >= 0) {
-          this.resourceUrl = response.detail.items[0].search_url;
-        } else if (this.resourceType.indexOf('Menu') >= 0) {
-          this.resourceUrl = response.detail.items[0].resource_url;
+        var refInfo = response.detail.items[0];
+
+        if(refInfo.title_field && refInfo.desc_field) {
+          this.selectFields = refInfo.title_field + ',' + refInfo.desc_field;
         }
+
+        if(this.resourceType.indexOf('Entity') >= 0) {
+          this.resourceUrl = refInfo.search_url;
+          if(refInfo.data_prop) this.itemsProp = refInfo.data_prop;
+
+        } else if (this.resourceType.indexOf('Menu') >= 0) {
+          this.resourceUrl = refInfo.resource_url;
+          if(refInfo.items_prop) this.itemsProp = refInfo.items_prop;
+        }
+
+        this.$.resource.generateRequest();
       },
 
       /**
-       * 드롭다운을 클릭했을 때 Storage 정보를 가져온다.
+       * 드롭다운을 클릭했을 때 참조 데이터를 가져온다.
        * ********
        * @param {Object} e
        */
