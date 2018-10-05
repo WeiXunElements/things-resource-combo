@@ -276,7 +276,8 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
           var resourceUrlAjax = this.$['resource-url-ajax'];
 
           if(resourceType == 'Url') {
-            this.resourceUrl = this.resourceName;
+            this.resourceUrl = this.resourceName
+            resourceUrlAjax.resourceUrl = this.resourceName;
 
           } else {
             resourceUrlAjax.resourceUrl = (resourceType && resourceType == 'Menu') ? 'menus' : 'entities';
@@ -285,9 +286,9 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
               operator: 'eq',
               value: this.resourceName
             } ];
-
-            resourceUrlAjax.generateRequest();
           }
+
+          resourceUrlAjax.generateRequest();
         }
       },
 
@@ -297,6 +298,10 @@ things-resource-combo. things-ajax 컴퍼넌트를 이용하여 resource data를
        * @param {Object} response
        */
       _urlResponseHandler: function(response) {
+        if(!response.detail || !response.detail.items || response.detail.items.length == 0) {
+          return;
+        }
+
         if(this.resourceType.indexOf('Entity') >= 0) {
           this.resourceUrl = response.detail.items[0].search_url;
         } else if (this.resourceType.indexOf('Menu') >= 0) {
