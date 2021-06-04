@@ -1,11 +1,11 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html" />
 
-<link rel="import" href="../things-ajax/things-ajax.html">
-<link rel="import" href="../things-combo/things-combo.html">
+<link rel="import" href="../things-ajax/things-ajax.html" />
+<link rel="import" href="../things-combo/things-combo.html" />
 
 <!--
 things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
@@ -29,7 +29,8 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
       items="{{items}}"
       label-path="[[labelPath]]"
       value-path="[[valuePath]]"
-      tab-index = "[[tabIndex]]">
+      tab-index="[[tabIndex]]"
+    >
     </things-combo>
 
     <things-ajax
@@ -40,13 +41,14 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
       select-fields="[[selectFields]]"
       query-fields="[[queryFields]]"
       last-response="{{lastResponse}}"
-      sort-fields="[[sortFields]]">
+      sort-fields="[[sortFields]]"
+    >
     </things-ajax>
   </template>
 
   <script type="text/javascript">
     Polymer({
-      is: 'things-storage-combo',
+      is: "things-storage-combo",
 
       properties: {
         /**
@@ -54,8 +56,8 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          * ********
          * @type: String
          */
-        name : {
-          type: String
+        name: {
+          type: String,
         },
 
         /**
@@ -65,7 +67,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         label: {
           type: String,
-          value: 'Storage'
+          value: "Storage",
         },
 
         /**
@@ -75,7 +77,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         value: {
           type: String,
-          notify: true
+          notify: true,
         },
 
         /**
@@ -85,7 +87,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         labelPath: {
           type: String,
-          value: 'description'
+          value: "description",
         },
 
         /**
@@ -95,7 +97,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         valuePath: {
           type: String,
-          value: 'name'
+          value: "name",
         },
 
         /**
@@ -105,7 +107,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         items: {
           type: Array,
-          notify: true
+          notify: true,
         },
 
         /**
@@ -115,7 +117,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         selectFields: {
           type: String,
-          value: 'id,name,description'
+          value: "id,name,description",
         },
 
         /**
@@ -124,7 +126,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          * @type: Array
          */
         queryFields: {
-          type: Array
+          type: Array,
         },
 
         /**
@@ -134,7 +136,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          */
         sortFields: {
           type: Array,
-          value: [{ field: 'name', ascending: true }]
+          value: [{ field: "name", ascending: true }],
         },
 
         /**
@@ -143,7 +145,7 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          * @type: Object
          */
         lastResponse: {
-          type: Object
+          type: Object,
         },
 
         /**
@@ -152,13 +154,13 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
          * @type: String
          */
         tabIndex: {
-          type: String
-        }
+          type: String,
+        },
       },
 
       listeners: {
-        'combo.things-combo-opened' : '_dropdownOpenHandler',
-        'storage.things-ajax-response' : '_responseHandler'
+        "combo.things-combo-opened": "_dropdownOpenHandler",
+        "storage.things-ajax-response": "_responseHandler",
       },
 
       /**
@@ -166,8 +168,8 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
        * ********
        * @param {Object} e
        */
-      _dropdownOpenHandler: function(e) {
-        if(!this.lastResponse || this.lastResponse == 0) {
+      _dropdownOpenHandler: function (e) {
+        if (!this.lastResponse || this.lastResponse == 0) {
           this.$.storage.generateRequest();
         }
       },
@@ -177,9 +179,9 @@ things-storage-combo. things-ajax 컴퍼넌트를 이용하여 storage_infos의 
        * ********
        * @param {Object} e
        */
-      _responseHandler: function(e) {
+      _responseHandler: function (e) {
         this.items = e.detail.items;
-      }
+      },
     });
   </script>
 </dom-module>

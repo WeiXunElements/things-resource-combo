@@ -1,13 +1,13 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-localstorage/iron-localstorage.html" />
 
-<link rel="import" href="../things-i18n-msg/things-i18n-msg.html">
-<link rel="import" href="things-code-combo.html">
-<link rel="import" href="../things-global-behavior/things-global-behavior.html">
+<link rel="import" href="../things-i18n-msg/things-i18n-msg.html" />
+<link rel="import" href="things-code-combo.html" />
+<link rel="import" href="../things-global-behavior/things-global-behavior.html" />
 <!--
 	다국어 설정을 위한 Locale Selector
 
@@ -24,160 +24,170 @@ Copyright © HatioLab Inc. All rights reserved.
 -->
 
 <dom-module id="things-locale-combo">
-	<template>
-		<style>
-			:host {
-				display: block;
-			}
-		</style>
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
 
-		<things-i18n-msg msgid="label.language" msg="{{language}}" auto hidden>Language</things-i18n-msg>
+    <things-i18n-msg msgid="label.language" msg="{{language}}" auto hidden>Language</things-i18n-msg>
 
-		<things-code-combo
-			id="code-selector"
-			label="[[language]]"
-			value="[[selectedLocale]]"
-			items ="[[localeItems]]"
-			code-name="LOCALE"
-			label-path="description"
-			value-path="name"
-			tab-index = "[[tabIndex]]">
-		</things-code-combo>
+    <things-code-combo
+      id="code-selector"
+      label="[[language]]"
+      value="[[selectedLocale]]"
+      items="[[localeItems]]"
+      code-name="LOCALE"
+      label-path="description"
+      value-path="name"
+      tab-index="[[tabIndex]]"
+    >
+    </things-code-combo>
 
-		<iron-localstorage name="[[storageName]]" value="{{globals.locale}}" on-iron-localstorage-load-empty="onLocaleEmpty"></iron-localstorage>
-		<things-i18n-src host="[[host]]" src-url="[[srcUrl]]"></things-i18n-src>
-	</template>
+    <iron-localstorage
+      name="[[storageName]]"
+      value="{{globals.locale}}"
+      on-iron-localstorage-load-empty="onLocaleEmpty"
+    ></iron-localstorage>
+    <things-i18n-src host="[[host]]" src-url="[[srcUrl]]"></things-i18n-src>
+  </template>
 
-	<script>
-		Polymer({
-			is: 'things-locale-combo',
+  <script>
+    Polymer({
+      is: "things-locale-combo",
 
-			properties: {
-				/**
-				 * things-i18n-src에서 사용될 host정보, host가 있으면 host를 사용하고 없으면 globals.baseUrl을 사용한다.
-				 * ******
-				 * @type {String}
-				 */
-				host: {
-					type: String
-				},
+      properties: {
+        /**
+         * things-i18n-src에서 사용될 host정보, host가 있으면 host를 사용하고 없으면 globals.baseUrl을 사용한다.
+         * ******
+         * @type {String}
+         */
+        host: {
+          type: String,
+        },
 
-				/**
-				 * things-i18n-src에서 사용될 srcUrl, host정보 용어 호출 URL
-				 * *****
-				 * @type {String}
-				 */
-				srcUrl: {
-					type: String,
-					value: 'terminologies/resource'
-				},
-				/**
-				 * Local Storage Name
-				 * ********
-				 * @type: String
-				 */
-				storageName: {
-					type: String,
-					value: 'setting.locale'
-				},
+        /**
+         * things-i18n-src에서 사용될 srcUrl, host정보 용어 호출 URL
+         * *****
+         * @type {String}
+         */
+        srcUrl: {
+          type: String,
+          value: "terminologies/resource",
+        },
+        /**
+         * Local Storage Name
+         * ********
+         * @type: String
+         */
+        storageName: {
+          type: String,
+          value: "setting.locale",
+        },
 
-				/**
-				 * 기본 locale
-				 * *******
-				 * @type {String}
-				 */
-				defaultLocale: {
-					type: String
-				},
+        /**
+         * 기본 locale
+         * *******
+         * @type {String}
+         */
+        defaultLocale: {
+          type: String,
+        },
 
-				/**
-				 * 선택된 Locale 값
-				 * ********
-				 * @type: String
-				 */
-				selectedLocale: {
-					type: String,
-					notify: true
-				},
+        /**
+         * 선택된 Locale 값
+         * ********
+         * @type: String
+         */
+        selectedLocale: {
+          type: String,
+          notify: true,
+        },
 
-				/**
-				 * localeItems
-				 * ********
-				 * @type: Array
-				 */
-				localeItems: {
-					type: Array
-				},
+        /**
+         * localeItems
+         * ********
+         * @type: Array
+         */
+        localeItems: {
+          type: Array,
+        },
 
-				/**
-				* tab index
-				* ********
-				* @type: String
-				*/
-				tabIndex:{
-					type: String
-				}
-			},
-			behaviors: [
-				Things.GlobalBehavior
-			],
+        /**
+         * tab index
+         * ********
+         * @type: String
+         */
+        tabIndex: {
+          type: String,
+        },
+      },
+      behaviors: [Things.GlobalBehavior],
 
-			listeners: {
-				'code-selector.things-combo-value-changed' : '_onComboValueChanged'
-			},
-			/**
-			 * Locale 설정이 안 된 경우 - 기본 로케일로 설정
-			 * ******
-			 */
-			onLocaleEmpty: function() {
-				if(this.defaultLocale){
-					this.set('selectedLocale', this.defaultLocale);
-				}else{
-					var language = navigator.language;
-					var parsedLocale ='';
-					if(language.indexOf('ko') == 0) {
-						parsedLocale= 'ko-KR';
-					} else if (language.indexOf('en') == 0) {
-						parsedLocale= 'en-US';
-					} else if (language.indexOf('zh') == 0) {
-						parsedLocale= 'zh-CN';
-					} else {
-						parsedLocale= 'en-US';
-					}
-					this.set('selectedLocale', parsedLocale);
-				}
-				this.set('globals.locale',this.selectedLocale);
-			},
-			/**
-			 * Combo 값이 변경될 때
-			 ********
-			 * @param {Object} event
-			 */
-			_onComboValueChanged: function(event) {
-				if(event.detail.value) {
-					this.set('selectedLocale', event.detail.value);
-				} else {
-					var localeItems = [ {
-						name : 'ko-KR', description: '한글'
-					}, {
-						name : 'en-US', description: 'English'
-					}, {
-						name : 'zh-CN', description: '中文'
-					} ];
+      listeners: {
+        "code-selector.things-combo-value-changed": "_onComboValueChanged",
+      },
+      /**
+       * Locale 설정이 안 된 경우 - 기본 로케일로 설정
+       * ******
+       */
+      onLocaleEmpty: function () {
+        if (this.defaultLocale) {
+          this.set("selectedLocale", this.defaultLocale);
+        } else {
+          var language = navigator.language;
+          var parsedLocale = "";
+          if (language.indexOf("ko") == 0) {
+            parsedLocale = "ko-KR";
+          } else if (language.indexOf("en") == 0) {
+            parsedLocale = "en-US";
+          } else if (language.indexOf("zh") == 0) {
+            parsedLocale = "zh-CN";
+          } else {
+            parsedLocale = "en-US";
+          }
+          this.set("selectedLocale", parsedLocale);
+        }
+        this.set("globals.locale", this.selectedLocale);
+      },
+      /**
+       * Combo 값이 변경될 때
+       ********
+       * @param {Object} event
+       */
+      _onComboValueChanged: function (event) {
+        if (event.detail.value) {
+          this.set("selectedLocale", event.detail.value);
+        } else {
+          var localeItems = [
+            {
+              name: "ko-KR",
+              description: "한글",
+            },
+            {
+              name: "en-US",
+              description: "English",
+            },
+            {
+              name: "zh-CN",
+              description: "中文",
+            },
+          ];
 
-					this.set('selectedLocale', event.detail.value || this.defaultLocale);
-					this.set('localeItems', localeItems);
-				}
-				this.set('globals.locale',this.selectedLocale);
-			},
+          this.set("selectedLocale", event.detail.value || this.defaultLocale);
+          this.set("localeItems", localeItems);
+        }
+        this.set("globals.locale", this.selectedLocale);
+      },
 
-			/**
-			 * 선택된 Locale 값을 리턴
-			 * *******
-			 */
-			getLocale: function() {
-				return this.selectedLocale
-			}
-		});
-	</script>
+      /**
+       * 선택된 Locale 값을 리턴
+       * *******
+       */
+      getLocale: function () {
+        return this.selectedLocale;
+      },
+    });
+  </script>
 </dom-module>

@@ -1,11 +1,11 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer.html" />
 
-<link rel="import" href="../things-ajax/things-ajax.html">
-<link rel="import" href="../things-combo/things-combo.html">
+<link rel="import" href="../things-ajax/things-ajax.html" />
+<link rel="import" href="../things-combo/things-combo.html" />
 
 <!--
 코드 셀렉터. 서버에 저장되어 있는 코드 정보를 조회하여 콤보로 표시하는 컴포넌트
@@ -24,202 +24,219 @@ Copyright © HatioLab Inc. All rights reserved.
 @demo demo/index.html
 -->
 <dom-module id="things-code-combo">
-    <template>
-        <things-combo id="combo" name="[[name]]" label="[[label]]" value="{{value}}" items="[[items]]"
-            label-path="[[labelPath]]" value-path="[[valuePath]]" tab-index="[[tabIndex]]"
-            error-message$="[[errorMessage]]" auto-validate$="[[autoValidate]]" required$="[[required]]"
-            is-valid="{{isValid}}" readonly="[[readonly]]" disabled$="[[disabled]]">
-        </things-combo>
+  <template>
+    <things-combo
+      id="combo"
+      name="[[name]]"
+      label="[[label]]"
+      value="{{value}}"
+      items="[[items]]"
+      label-path="[[labelPath]]"
+      value-path="[[valuePath]]"
+      tab-index="[[tabIndex]]"
+      error-message$="[[errorMessage]]"
+      auto-validate$="[[autoValidate]]"
+      required$="[[required]]"
+      is-valid="{{isValid}}"
+      readonly="[[readonly]]"
+      disabled$="[[disabled]]"
+    >
+    </things-combo>
 
-        <things-ajax auto id="resource" resource-url="common_codes/show_by_name" resource-action="show_by_name"
-            params="[[params]]">
-        </things-ajax>
-    </template>
+    <things-ajax
+      auto
+      id="resource"
+      resource-url="common_codes/show_by_name"
+      resource-action="show_by_name"
+      params="[[params]]"
+    >
+    </things-ajax>
+  </template>
 
-    <script type="text/javascript">
-        Polymer({
-            is: 'things-code-combo',
+  <script type="text/javascript">
+    Polymer({
+      is: "things-code-combo",
 
-            properties: {
-                /**
-                 * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-                 * ********
-                 * @type: String
-                 */
-                name: {
-                    type: String
-                },
+      properties: {
+        /**
+         * element name, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         * ********
+         * @type: String
+         */
+        name: {
+          type: String,
+        },
 
-                /**
-                 * element에 표시할 라벨
-                 * ********
-                 * @type: String
-                 */
-                label: {
-                    type: String
-                },
+        /**
+         * element에 표시할 라벨
+         * ********
+         * @type: String
+         */
+        label: {
+          type: String,
+        },
 
-                /**
-                 * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
-                 * ********
-                 * @type: String
-                 */
-                value: {
-                    type: String,
-                    notify: true
-                },
+        /**
+         * element value, Form 안에 들어가는 경우 Ajax 요청시 name : value 형식으로 서버에 요청된다.
+         * ********
+         * @type: String
+         */
+        value: {
+          type: String,
+          notify: true,
+        },
 
-                /**
-                 * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
-                 * ********
-                 * @type: String
-                 */
-                labelPath: {
-                    type: String
-                },
+        /**
+         * 코드 데이터 중에서 Code Selector에 표시할 데이터 패스.
+         * ********
+         * @type: String
+         */
+        labelPath: {
+          type: String,
+        },
 
-                /**
-                 * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
-                 * ********
-                 * @type: String
-                 */
-                valuePath: {
-                    type: String
-                },
+        /**
+         * 코드 데이터 중에서 Code Selector가 가질 값에 대한 데이터 패스.
+         * ********
+         * @type: String
+         */
+        valuePath: {
+          type: String,
+        },
 
-                /**
-                 * code 명. code name으로 code 정보를 조회하는 URL을 구성한다.
-                 * ********
-                 * @type: String
-                 */
-                codeName: {
-                    type: String
-                },
+        /**
+         * code 명. code name으로 code 정보를 조회하는 URL을 구성한다.
+         * ********
+         * @type: String
+         */
+        codeName: {
+          type: String,
+        },
 
-                /**
-                 * Code items
-                 * ********
-                 * @type: Array
-                 */
-                items: {
-                    type: Array
-                },
+        /**
+         * Code items
+         * ********
+         * @type: Array
+         */
+        items: {
+          type: Array,
+        },
 
-                /**
-                 * Code 조회시 서버에 넘어가는 파라미터 (codeName)
-                 * ********
-                 * @type: String
-                 */
-                params: {
-                    type: String,
-                    computed: '_computeParams(codeName)'
-                },
+        /**
+         * Code 조회시 서버에 넘어가는 파라미터 (codeName)
+         * ********
+         * @type: String
+         */
+        params: {
+          type: String,
+          computed: "_computeParams(codeName)",
+        },
 
-                /**
-                 * Tab index
-                 * ********
-                 * @type: String
-                 */
-                tabIndex: {
-                    type: String
-                },
+        /**
+         * Tab index
+         * ********
+         * @type: String
+         */
+        tabIndex: {
+          type: String,
+        },
 
-                /**
-                 * input field에 반드시 값이 포함되어야 함을 결정 합니다.
-                 * ********
-                 * @type: Boolean
-                 */
-                required: {
-                    type: Boolean,
-                    value: false
-                },
+        /**
+         * input field에 반드시 값이 포함되어야 함을 결정 합니다.
+         * ********
+         * @type: Boolean
+         */
+        required: {
+          type: Boolean,
+          value: false,
+        },
 
-                /**
-                 * 자동 validation check 활성화 여부
-                 * ********
-                 * @type: Boolean
-                 *
-                 */
-                autoValidate: {
-                    type: Boolean,
-                    value: false
-                },
+        /**
+         * 자동 validation check 활성화 여부
+         * ********
+         * @type: Boolean
+         *
+         */
+        autoValidate: {
+          type: Boolean,
+          value: false,
+        },
 
-                /**
-                 * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
-                 * ********
-                 * @type: Boolean
-                 */
-                isValid: {
-                    type: Boolean,
-                    value: true
-                },
+        /**
+         * validate 함수를 통해 return 되는 값으로 초기화 하는 변수
+         * ********
+         * @type: Boolean
+         */
+        isValid: {
+          type: Boolean,
+          value: true,
+        },
 
-                /**
-                 * readonly or not
-                 * ********
-                 * @type: Boolean
-                 */
-                readonly: {
-                    type: Boolean,
-                    value: false
-                },
+        /**
+         * readonly or not
+         * ********
+         * @type: Boolean
+         */
+        readonly: {
+          type: Boolean,
+          value: false,
+        },
 
-                /**
-                 * validation check를 통해 isValid의 값이 false일 때 화면에 나타나는 errorMessage
-                 * ********
-                 * @type: String
-                 */
-                errorMessage: {
-                    type: String,
-                    value: function () {
-                        return Things.DataGlobal.t('text.invalid_input');
-                    }
-                },
+        /**
+         * validation check를 통해 isValid의 값이 false일 때 화면에 나타나는 errorMessage
+         * ********
+         * @type: String
+         */
+        errorMessage: {
+          type: String,
+          value: function () {
+            return Things.DataGlobal.t("text.invalid_input");
+          },
+        },
 
-                /**
-                 * disable or not
-                 * ********
-                 * @type: Boolean
-                 */
-                 disabled: {
-                    type: Boolean,
-                    notify: true,
-                    value: false
-                }
-            },
+        /**
+         * disable or not
+         * ********
+         * @type: Boolean
+         */
+        disabled: {
+          type: Boolean,
+          notify: true,
+          value: false,
+        },
+      },
 
-            listeners: {
-                'resource.things-ajax-response': '_onResponse'
-            },
+      listeners: {
+        "resource.things-ajax-response": "_onResponse",
+      },
 
-            /**
-             * Code 조회시 필요한 parameter - codeName
-             * ********
-             * @param {String} codeName
-             */
-            _computeParams: function (codeName) {
-                return {
-                    name: codeName
-                };
-            },
+      /**
+       * Code 조회시 필요한 parameter - codeName
+       * ********
+       * @param {String} codeName
+       */
+      _computeParams: function (codeName) {
+        return {
+          name: codeName,
+        };
+      },
 
-            /**
-             * 코드 조회 결과 응답이 도착했을 경우
-             * ********
-             * @param {Object} e
-             */
-            _onResponse: function (e) {
-                this.items = e.detail.items;
-            },
+      /**
+       * 코드 조회 결과 응답이 도착했을 경우
+       * ********
+       * @param {Object} e
+       */
+      _onResponse: function (e) {
+        this.items = e.detail.items;
+      },
 
-            /**
-             * 수동 validation check function
-             * ********
-             */
-            validate: function () {
-                this.$.combo.validate();
-            }
-        });
-    </script>
+      /**
+       * 수동 validation check function
+       * ********
+       */
+      validate: function () {
+        this.$.combo.validate();
+      },
+    });
+  </script>
 </dom-module>

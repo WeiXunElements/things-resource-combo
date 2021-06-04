@@ -1,13 +1,13 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-localstorage/iron-localstorage.html" />
 
-<link rel="import" href="../things-i18n-msg/things-i18n-msg.html">
-<link rel="import" href="../things-combo/things-combo.html">
-<link rel="import" href="../things-ajax/things-ajax.html">
+<link rel="import" href="../things-i18n-msg/things-i18n-msg.html" />
+<link rel="import" href="../things-combo/things-combo.html" />
+<link rel="import" href="../things-ajax/things-ajax.html" />
 
 <!--
 	메뉴 콤보. things-ajax 컴퍼넌트를 이용하여 menu data를 조회, 콤보박스의 형태로 출력하고 선택한 값을 input field에 표시하는 컴퍼넌트
@@ -22,168 +22,172 @@ Copyright © HatioLab Inc. All rights reserved.
 -->
 
 <dom-module id="things-menu-combo">
-	<template>
-		<style>
-			:host {
-				display: block;
-			}
-		</style>
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
 
-		<things-i18n-msg msgid="label.default_screen" msg="{{lDefaultScreen}}" hidden>Default Screen</things-i18n-msg>
+    <things-i18n-msg msgid="label.default_screen" msg="{{lDefaultScreen}}" hidden>Default Screen</things-i18n-msg>
 
-		<things-ajax
-			auto
-			id="menu-ajax"
-			resource-url="menus/user_menus/STANDARD"
-			resource-action="index"
-			query-fields="[[queryFields]]"
-			last-response="{{menus}}">
-		</things-ajax>
+    <things-ajax
+      auto
+      id="menu-ajax"
+      resource-url="menus/user_menus/STANDARD"
+      resource-action="index"
+      query-fields="[[queryFields]]"
+      last-response="{{menus}}"
+    >
+    </things-ajax>
 
-		<things-combo
-			id="combo"
-			label="{{lDefaultScreen}}"
-			value="{{value}}"
-			items="[[items]]"
-			label-path="name"
-			tab-index ="[[tabIndex]]">
-		</things-combo>
+    <things-combo
+      id="combo"
+      label="{{lDefaultScreen}}"
+      value="{{value}}"
+      items="[[items]]"
+      label-path="name"
+      tab-index="[[tabIndex]]"
+    >
+    </things-combo>
 
-		<iron-localstorage name="[[storageName]]" value="{{defaultScreen}}"></iron-localstorage>
-	</template>
+    <iron-localstorage name="[[storageName]]" value="{{defaultScreen}}"></iron-localstorage>
+  </template>
 
-	<script>
-		Polymer({
-			is: 'things-menu-combo',
+  <script>
+    Polymer({
+      is: "things-menu-combo",
 
-			listeners: {
-				'combo.things-combo-value-changed': '_comboValueChanged',
-				'menu-ajax.things-ajax-response': '_ajaxResponsed'
-			},
+      listeners: {
+        "combo.things-combo-value-changed": "_comboValueChanged",
+        "menu-ajax.things-ajax-response": "_ajaxResponsed",
+      },
 
-			properties: {
-				/**
-				 * 메뉴 검색 결과
-				 * ********
-				 * @type: Array
-				 */
-				menus: {
-					type: Array
-				},
+      properties: {
+        /**
+         * 메뉴 검색 결과
+         * ********
+         * @type: Array
+         */
+        menus: {
+          type: Array,
+        },
 
-				/**
-				 * menu items
-				 * ********
-				 * @type: Array
-				 */
-				items: {
-					type: Array
-				},
+        /**
+         * menu items
+         * ********
+         * @type: Array
+         */
+        items: {
+          type: Array,
+        },
 
-				/**
-				 * routing data
-				 * ********
-				 * @type: String
-				 */
-				value: {
-					type: String,
-					notify: true
-				},
+        /**
+         * routing data
+         * ********
+         * @type: String
+         */
+        value: {
+          type: String,
+          notify: true,
+        },
 
-				/**
-				 * ajax query field
-				 * ********
-				 * @type: Array
-				 */
-				queryFields: {
-					type: Array,
-					value: [ {
-						name: 'menu_type',
-						operator: 'eq',
-						value: 'SCREEN'
-					}, {
-						name: 'category',
-						operator: 'eq',
-						value: 'STANDARD'
-					}, {
-						name: 'hidden_flag',
-						operator: 'is_not_true'
-					} ]
-				},
+        /**
+         * ajax query field
+         * ********
+         * @type: Array
+         */
+        queryFields: {
+          type: Array,
+          value: [
+            {
+              name: "menu_type",
+              operator: "eq",
+              value: "SCREEN",
+            },
+            {
+              name: "category",
+              operator: "eq",
+              value: "STANDARD",
+            },
+            {
+              name: "hidden_flag",
+              operator: "is_not_true",
+            },
+          ],
+        },
 
-				/**
-				 * defaultScreen routing info
-				 * ********
-				 * @type: String
-				 */
-				defaultScreen: {
-					type: String,
-					notify: true
-				},
+        /**
+         * defaultScreen routing info
+         * ********
+         * @type: String
+         */
+        defaultScreen: {
+          type: String,
+          notify: true,
+        },
 
-				/**
-				 * tab index
-				 * ********
-				 * @type: String
-				 */
-				tabIndex: {
-					type: String
-				}
-			},
+        /**
+         * tab index
+         * ********
+         * @type: String
+         */
+        tabIndex: {
+          type: String,
+        },
+      },
 
-			observers: [
-				'_menusChanged(menus)'
-			],
+      observers: ["_menusChanged(menus)"],
 
-			/**
-			 * 메뉴 조회 리스트 변경시
-			 * *******
-			 * @param {Array} menus
-			 */
-			_menusChanged: function(menus) {
-				if(menus && menus.length > 0) {
-					this.items = menus.map(function(menu) {
-						return { name : menu.name, description : menu.title, routing : menu.routing }
-					});
-				} else {
-					this.items = menus;
-				}
-			},
+      /**
+       * 메뉴 조회 리스트 변경시
+       * *******
+       * @param {Array} menus
+       */
+      _menusChanged: function (menus) {
+        if (menus && menus.length > 0) {
+          this.items = menus.map(function (menu) {
+            return { name: menu.name, description: menu.title, routing: menu.routing };
+          });
+        } else {
+          this.items = menus;
+        }
+      },
 
-			/**
-			 * 메뉴 조회 후 response event listener
-			 * defaultScreen 값이 있다면 해당 값의 name을 찾아 value에 초기화
-			 * *******
-			 */
-			_ajaxResponsed: function() {
-				if(this.defaultScreen) {
-					var routing = this.defaultScreen.slice(1);
+      /**
+       * 메뉴 조회 후 response event listener
+       * defaultScreen 값이 있다면 해당 값의 name을 찾아 value에 초기화
+       * *******
+       */
+      _ajaxResponsed: function () {
+        if (this.defaultScreen) {
+          var routing = this.defaultScreen.slice(1);
 
-					for(var i = 0; i < this.menus.length; i++) {
-						if(this.menus[i].routing == routing) {
-							this.value = this.menus[i].name;
-							break;
-						}
-					}
-				}
-			},
+          for (var i = 0; i < this.menus.length; i++) {
+            if (this.menus[i].routing == routing) {
+              this.value = this.menus[i].name;
+              break;
+            }
+          }
+        }
+      },
 
-			/**
-			 * things-combo value change event listener
-			 * value가 변경 되면 해당 routing을 defaultScreen에 초기화
-			 * *******
-			 * @param {Object} event
-			 */
-			_comboValueChanged: function(event) {
-				var value = event.detail.value;
+      /**
+       * things-combo value change event listener
+       * value가 변경 되면 해당 routing을 defaultScreen에 초기화
+       * *******
+       * @param {Object} event
+       */
+      _comboValueChanged: function (event) {
+        var value = event.detail.value;
 
-				for(var i = 0; i < this.items.length; i++) {
-					if(this.items[i].name == value) {
-						this.defaultScreen = '/' + this.items[i].routing;
-						break;
-					}
-				}
-			}
-		});
-	</script>
+        for (var i = 0; i < this.items.length; i++) {
+          if (this.items[i].name == value) {
+            this.defaultScreen = "/" + this.items[i].routing;
+            break;
+          }
+        }
+      },
+    });
+  </script>
 </dom-module>
