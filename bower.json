@@ -1,6 +1,6 @@
 {
   "name": "things-resource-combo",
-  "version": "v2.2.5",
+  "version": "v2.2.6",
   "authors": [
     "Shenzhen Weixun"
   ],
@@ -18,8 +18,8 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
     "iron-localstorage": "^1.0.5",
-    "things-ajax": "ThingsElements/things-ajax",
-    "things-combo": "ThingsElements/things-combo"
+    "things-ajax": "WeiXunElements/things-ajax",
+    "things-combo": "WeiXunElements/things-combo"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -29,7 +29,7 @@
     "paper-styles": "^1.1.4",
     "paper-toast": "^1.2.2",
     "paper-button": "^1.0.11",
-    "things-spinner": "ThingsElements/things-spinner",
-    "things-setting": "ThingsElements/things-setting"
+    "things-spinner": "WeiXunElements/things-spinner",
+    "things-setting": "WeiXunElements/things-setting"
   }
 }
